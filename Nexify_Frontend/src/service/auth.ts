@@ -18,11 +18,27 @@ export class AuthService {
                 this.token.next(resp.token);
                 console.log(resp.token);
                 localStorage.setItem('token', resp.token);
+                const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+                this.router.navigateByUrl(returnUrl);
             })
     }
     logout() {
+        localStorage.removeItem('token');
     }
+
     getToken() {
+        return this.token.value;
+    }
+
+    isLoggedIn() {
+    
+    }
+
+    loadToken() {
+        const token = localStorage.getItem('token');
+        if (token) {
+            this.token.next(token);
+        }
         return this.token.value;
     }
      
