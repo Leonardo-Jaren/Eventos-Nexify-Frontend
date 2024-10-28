@@ -9,9 +9,10 @@ import { Evento } from '../../models/evento.model';
   providers: [ApiService]
 })
 export class PruebaComponent {
-  eventos:Evento[];
+  eventos: Evento[];
   constructor(private conexionAPI: ApiService) {}
-  ngonInit() {
+
+  ngOnInit() { // Corrected method name from ngonInit to ngOnInit
     this.conexionAPI.getEventos().subscribe(res => {
       this.eventos = res;
       console.log(this.eventos);

@@ -8,7 +8,7 @@ import { Evento } from "../models/evento.model";
 })
 
 export class ApiService {
-    private ApiUrl = "http://localhost:127.0.0.1:8000/api/"; // URL to web api
+    private ApiUrl = "http://127.0.0.1:8000/api/"; // URL to web api
     private httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
@@ -19,11 +19,11 @@ export class ApiService {
 
     //GET Eventos
     public getEventos(): Observable<Evento[]> {
-      return this.http.get<Evento[]>(this.ApiUrl + 'eventos')
+      return this.http.get<Evento[]>(this.ApiUrl + 'eventos/')
     }
     //POST Evento
     public postEvento(evento: Evento): Observable<Evento> {
-      return this.http.post<Evento>(this.ApiUrl + 'eventos', evento, this.httpOptions)
+      return this.http.post<Evento>(this.ApiUrl + 'eventos/', evento, this.httpOptions)
     }
     //PUT Evento
     public putEvento(evento: Evento): Observable<Evento> {
