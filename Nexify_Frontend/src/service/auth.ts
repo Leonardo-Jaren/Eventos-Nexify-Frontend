@@ -1,46 +1,47 @@
-import { Injectable} from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Router, ActivatedRoute } from "@angular/router";
-import { BehaviorSubject } from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-    providedIn: "root"
+  providedIn: 'root'
 })
 export class AuthService {
-    private token = new BehaviorSubject<string | null>(null);
-    private ApiUrl = "http://127.0.0.1:8000/api/";
-    constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
+  private token = new BehaviorSubject<string | null>(null);
+  private ApiUrl = "http://127.0.0.1:8000/api/"; // URL to web api
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
 
-    login(username:string, password:string) {
-        const headers = {'X-API-KEY': '2eb09af6a6beb25b88ab8786f911c1832ccf52b6'};
-        this.http.post<{token: string}>(this.ApiUrl
-            + 'token-auth/', {username, password}, {headers}).subscribe(resp => {
-                this.token.next(resp.token);
-                console.log(resp.token);
-                localStorage.setItem('token', resp.token);
-                const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-                this.router.navigateByUrl(returnUrl);
-            })
-    }
-    logout() {
-        localStorage.removeItem('token');
-    }
+  login(username: string, password: string) {
+    const headers = { 'API-Key': '1cf535c7f0f585ab0e4a29419d62c048296a4cd1' };
+    this.http.post<{token: string}>(this.ApiUrl + 'login/', {username, password}, {headers})
+      .subscribe(response => {
+        this.token.next(response.token);
+        localStorage.setItem('token', response.token);
+        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+        this.router.navigateByUrl(returnUrl);
+      }, error => {
+        console.error('Error login', error);
+      });
+  }
 
-    getToken() {
-        return this.token.value;
-    }
+  logout(){
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+    window.location.reload();
+  }
 
-    isLoggedIn() {
-    
-    }
+  getToken() {
+    return this.token.value;
+  }
 
-    loadToken() {
-        const token = localStorage.getItem('token');
-        if (token) {
-            this.token.next(token);
-        }
-        return this.token.value;
-    }
-     
+  isLoggedIn() {
+    return this.token.value !== null;
+  }
 
+  loadToken() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.token.next(token);
+    }
+  }
 }

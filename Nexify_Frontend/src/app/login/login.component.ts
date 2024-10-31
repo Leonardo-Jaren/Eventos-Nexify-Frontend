@@ -10,6 +10,6 @@ import { AuthService } from '../../service/auth';
 export class LoginComponent {
   constructor (private auth: AuthService) {}
   ngOnInit() {
-    this.auth.login('prueba_4','123456789');
+    this.auth.login('prueba@gmail.com','123456789');
   }
 }
