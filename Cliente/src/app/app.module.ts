@@ -13,7 +13,8 @@ import { CardModule } from 'primeng/card'; // Módulo de Card de PrimeNG
 import { FormsModule } from '@angular/forms';
 import { UsersComponent } from './users/users.component'; // Módulo de formularios de Angular
 import { TableModule } from 'primeng/table'; // Módulo de tabla de PrimeNG
-import { PanelModule } from 'primeng/panel'; // Módulo de panel de PrimeNG
+import { PanelModule } from 'primeng/panel';
+import { EventosComponent } from './eventos/eventos.component'; // Módulo de panel de PrimeNG
 
 
 
@@ -23,6 +24,7 @@ import { PanelModule } from 'primeng/panel'; // Módulo de panel de PrimeNG
     NexAppComponent,
     LoginComponent,
     UsersComponent,
+    EventosComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,18 @@
+<table border="1">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Campo1</th>
+            <th>Campo2</th>
+            <th>Campo3</th>
+            <!-- Agrega más campos según el modelo -->
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-evento>
+        <tr>
+            <td>{{ evento.nombre_descripcion }}</td>
+            <td>{{ evento.desripcion }}</td>
+            <td>{{ evento.campo3 }}</td>
+            <!-- Agrega más campos según el modelo -->
+        </tr>
+    </ng-template>
+</table>

@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
 
   login(username: string, password: string) {
-    const headers = { 'API-KEY': '1cf535c7f0f585ab0e4a29419d62c048296a4cd1' };
+    const headers = { 'API-KEY': 'fe1147108cf466dc2085a0cf14757bc1a4974a11' };
     this.http.post<{token: string}>(this.ApiUrl + 'login/', {username, password}, {headers})
       .subscribe(response => {
         this.token.next(response.token);
@@ -34,10 +34,14 @@ export class AuthService {
     return this.token.value;
   }
 
-  isLoggedIn() {
-    return this.token.value !== null;
+  isLoggedIn(): boolean {
+    if (typeof localStorage !== 'undefined') {
+      // Usa localStorage aquí
+      return !!localStorage.getItem('token');
+    }
+    return false;
   }
-
+  
   loadToken() {
     const token = localStorage.getItem('token');
     if (token) {

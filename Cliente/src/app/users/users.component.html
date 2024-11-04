@@ -1,1 +1,14 @@
-<p>users works!</p>
+<div class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="bg-white p-8 rounded-lg shadow-lg">
+      <h1 class="text-2xl font-semibold mb-4">Bienvenido, usuario</h1>
+      <p class="text-gray-600 mb-6">Puedes cerrar sesión usando el botón de abajo:</p>
+      
+      <button 
+        (click)="logout()" 
+        class="w-full py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none"
+      >
+        Cerrar sesión
+      </button>
+    </div>
+  </div>
+  
