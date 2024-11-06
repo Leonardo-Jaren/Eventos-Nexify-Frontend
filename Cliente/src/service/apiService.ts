@@ -24,12 +24,13 @@ export class ApiService {
         return this.http.get<Usuario[]>(this.ApiUrl + 'usuario');
     }
 
+    // ! Método para obtener los eventos
     getEventos(): Observable<Evento[]> {
       const token = localStorage.getItem('token');
       const httpOptions = {
           headers: new HttpHeaders({
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}` // Asegúrate de que tu backend espera el token en este formato
+              'Authorization': `token ${token}`, // Asegúrate de que tu backend espera el token en este formato
           })
       };
       return this.http.get<Evento[]>(this.ApiUrl + 'eventos/', httpOptions);

@@ -12,12 +12,16 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
 
   login(username: string, password: string) {
-    const headers = { 'API-KEY': 'fe1147108cf466dc2085a0cf14757bc1a4974a11' };
+    const headers = { 'API-KEY': '1cf535c7f0f585ab0e4a29419d62c048296a4cd1' };
     this.http.post<{token: string}>(this.ApiUrl + 'login/', {username, password}, {headers})
       .subscribe(response => {
+        
+        // Guardar el token en el BehaviorSubject y localStorage
         this.token.next(response.token);
         localStorage.setItem('token', response.token);
-        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+
+        // Guardar el token en el BehaviorSubject y localStorage
+        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/eventos';
         this.router.navigateByUrl(returnUrl);
       }, error => {
         console.error('Error login', error);
