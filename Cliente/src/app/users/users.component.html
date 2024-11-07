@@ -1,14 +1,103 @@
-<div class="flex justify-center items-center min-h-screen bg-gray-100">
-    <div class="bg-white p-8 rounded-lg shadow-lg">
-      <h1 class="text-2xl font-semibold mb-4">Bienvenido, usuario</h1>
-      <p class="text-gray-600 mb-6">Puedes cerrar sesión usando el botón de abajo:</p>
+<!-- Tabla de usuarios -->
+<p-table [value]="users" [tableStyle]="{ 'min-width': '50rem' }" class="table-auto w-full text-center">
+    <ng-template pTemplate="header">
+        <tr class="bg-gray-100">
+            <th class="p-2 border-b">ID</th>
+            <th class="p-2 border-b">Nombre</th>
+            <th class="p-2 border-b">Rol</th>
+            <th class="p-2 border-b">Teléfono</th>
+            <th class="p-2 border-b">LinkedIn</th>
+            <th class="p-2 border-b">Rango</th>
+            <th class="p-2 border-b">Eventos Asistidos</th>
+            <th class="p-2 border-b">Acciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+        <tr class="hover:bg-gray-50">
+            <td class="p-2 border-b">{{ user.id }}</td>
+            <td class="p-2 border-b">{{ user.username }}</td>
+            <td class="p-2 border-b">{{ user.rol }}</td>
+            <td class="p-2 border-b">{{ user.telefono }}</td>
+            <td class="p-2 border-b">
+                <a [href]="user.urlLinkedin" target="_blank" class="text-blue-500 hover:underline">{{ user.urlLinkedin }}</a>
+            </td>
+            <td class="p-2 border-b">{{ user.rango }}</td>
+            <td class="p-2 border-b">{{ user.eventosAsistidos }}</td>
+            <td class="p-2 border-b">
+                <div class="flex gap-2 justify-center">
+                    <button title="Editar" type="button" class="p-2 bg-green-500 hover:bg-green-600 text-white rounded-full" (click)="editUser(user)">
+                        <i class="fas fa-pencil-alt"></i>
+                    </button>
+                    <button title="Eliminar" type="button" class="p-2 bg-red-500 hover:bg-red-600 text-white rounded-full" (click)="deleteUser(user)">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+  </p-table>
+  
+  <!-- Botón para mostrar el cuadro de diálogo -->
+  <button (click)="showDialog()" class="my-4 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-md py-2 px-4">
+      <i class="fas fa-user-plus mr-2"></i> Crear Usuario
+  </button>
+  
+  <!-- Cuadro de diálogo para crear/editar usuario -->
+  <p-dialog header="Editar Perfil" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }" class="rounded-lg">
+      <span class="block text-gray-600 mb-5">Actualiza la información del usuario.</span>
       
-      <button 
-        (click)="logout()" 
-        class="w-full py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none"
-      >
-        Cerrar sesión
-      </button>
-    </div>
-  </div>
+      <!-- Campo para el nombre de usuario -->
+      <div class="flex items-center gap-3 mb-3">
+          <label for="username" class="font-semibold w-24">Nombre</label>
+          <input pInputText id="username" [(ngModel)]="nuevo.username" class="flex-auto p-2 border border-gray-300 rounded-md" />
+      </div>
+      
+      <!-- Campo para contraseña -->
+      <div class="flex items-center gap-3 mb-3">
+          <label for="password" class="font-semibold w-24">Contraseña</label>
+          <input pInputText id="password" type="password" [(ngModel)]="nuevo.password" class="flex-auto p-2 border border-gray-300 rounded-md" />
+      </div>
+
+      <!-- Campo para el rol -->
+      <div class="flex items-center gap-3 mb-3">
+          <label for="rol" class="font-semibold w-24">Rol</label>
+          <select id="rol" [(ngModel)]="nuevo.rol" class="flex-auto p-2 border border-gray-300 rounded-md">
+              <option *ngFor="let key of nuevo.roleChoices | keyvalue" [value]="key.key">{{ key.value }}</option>
+          </select>
+      </div>
+      
+      <!-- Campo para el teléfono -->
+      <div class="flex items-center gap-3 mb-3">
+          <label for="telefono" class="font-semibold w-24">Teléfono</label>
+          <input pInputText id="telefono" [(ngModel)]="nuevo.telefono" class="flex-auto p-2 border border-gray-300 rounded-md" />
+      </div>
+      
+      <!-- Campo para LinkedIn -->
+      <div class="flex items-center gap-3 mb-3">
+          <label for="linkedin" class="font-semibold w-24">LinkedIn</label>
+          <input pInputText id="linkedin" [(ngModel)]="nuevo.urlLinkedin" class="flex-auto p-2 border border-gray-300 rounded-md" />
+      </div>
+      
+      <!-- Campo para el rango -->
+      <div class="flex items-center gap-3 mb-3">
+          <label for="rango" class="font-semibold w-24">Rango</label>
+          <input pInputText id="rango" [(ngModel)]="nuevo.rango" type="number" class="flex-auto p-2 border border-gray-300 rounded-md" />
+      </div>
+      
+      <!-- Campo para eventos asistidos -->
+      <div class="flex items-center gap-3 mb-5">
+          <label for="eventosAsistidos" class="font-semibold w-24">Eventos Asistidos</label>
+          <input pInputText id="eventosAsistidos" [(ngModel)]="nuevo.eventosAsistidos" type="number" class="flex-auto p-2 border border-gray-300 rounded-md" />
+      </div>
+      
+      <!-- Botones de acción -->
+      <div class="flex justify-end gap-2">
+          <button (click)="visible = false" class="bg-gray-400 hover:bg-gray-500 text-white font-semibold rounded-md py-2 px-4">
+              <i class="fas fa-times mr-2"></i> Cancelar
+          </button>
+          <button (click)="guardarUsuario(nuevo)" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4">
+              <i class="fas fa-save mr-2"></i> Guardar
+          </button>
+      </div>
+  </p-dialog>
   

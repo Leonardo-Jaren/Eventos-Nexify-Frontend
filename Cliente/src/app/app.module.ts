@@ -15,8 +15,7 @@ import { UsersComponent } from './users/users.component'; // Módulo de formular
 import { TableModule } from 'primeng/table'; // Módulo de tabla de PrimeNG
 import { PanelModule } from 'primeng/panel';
 import { EventosComponent } from './eventos/eventos.component'; // Módulo de panel de PrimeNG
-
-
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -38,6 +37,7 @@ import { EventosComponent } from './eventos/eventos.component'; // Módulo de pa
     FormsModule, // Para ngModel
     TableModule, // Para tablas
     PanelModule, // Para paneles
+    DialogModule, // Para diálogos
   ],
   providers: [
     provideClientHydration(),

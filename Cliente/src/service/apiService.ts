@@ -4,37 +4,43 @@ import { Observable } from "rxjs";
 import { Usuario } from "../models/usuario.model";
 import { Evento } from "../models/evento.model";
 
-
 @Injectable({
   providedIn: "root"
 })
-
 export class ApiService {
-    private ApiUrl = "http://127.0.0.1:8000/api/"; // URL to web api
-    private httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        })
-    };
-    constructor(private http: HttpClient) {
+    private ApiUrl = "http://127.0.0.1:8000/api/"; // URL de la API
+
+    constructor(private http: HttpClient) {}
+
+    // ! Configura los encabezados de autenticación si el token está presente
+    private getHttpOptions(): { headers: HttpHeaders } {
+        const token = localStorage.getItem('token');
+        return {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                ...(token ? { 'Authorization': `token ${token}` } : {})
+            })
+        };
     }
 
-    //GET all users
+    // ! Método para obtener los usuarios
     getUsers(): Observable<Usuario[]> {
-        return this.http.get<Usuario[]>(this.ApiUrl + 'usuario');
+        return this.http.get<Usuario[]>(`${this.ApiUrl}usuario/`, this.getHttpOptions());
+    }
+
+    // ! Método para insertar un usuario
+    insertUser(usuario: Usuario): Observable<Usuario> {
+        const body = JSON.stringify(usuario);
+        return this.http.post<Usuario>(`${this.ApiUrl}usuario/`, body, this.getHttpOptions());
+    }
+
+    // ! Metodo para elminar usuario
+    deleteUser(usuario: Usuario): Observable<void> {
+        return this.http.delete<void>(`${this.ApiUrl}usuario/${usuario.id}/`, this.getHttpOptions());
     }
 
     // ! Método para obtener los eventos
     getEventos(): Observable<Evento[]> {
-      const token = localStorage.getItem('token');
-      const httpOptions = {
-          headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-              'Authorization': `token ${token}`, // Asegúrate de que tu backend espera el token en este formato
-          })
-      };
-      return this.http.get<Evento[]>(this.ApiUrl + 'eventos/', httpOptions);
-  }
-
-
+        return this.http.get<Evento[]>(`${this.ApiUrl}eventos/`, this.getHttpOptions());
+    }
 }

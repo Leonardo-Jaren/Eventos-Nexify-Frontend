@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
   private token = new BehaviorSubject<string | null>(null);
   private ApiUrl = "http://127.0.0.1:8000/api/"; // URL to web api
+
   constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
 
   login(username: string, password: string) {
@@ -21,7 +23,7 @@ export class AuthService {
         localStorage.setItem('token', response.token);
 
         // Guardar el token en el BehaviorSubject y localStorage
-        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/eventos';
+        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/user';
         this.router.navigateByUrl(returnUrl);
       }, error => {
         console.error('Error login', error);
