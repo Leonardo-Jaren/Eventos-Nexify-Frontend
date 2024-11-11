@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../service/apiService';
 import { Evento } from '../../models/evento.model';
+import { AuthService } from '../../service/auth';
 
 @Component({
   selector: 'app-eventos',
@@ -8,11 +9,18 @@ import { Evento } from '../../models/evento.model';
   styleUrl: './eventos.component.css'
 })
 export class EventosComponent {
-  constructor(private cliente: ApiService) {}
   eventos: Evento[];
+  constructor(private authService: AuthService, private cliente: ApiService) {}
+
   ngOnInit(): void {
     this.cliente.getEventos().subscribe(eventos => {
       this.eventos = eventos;
     });
-    }
+  }
+
+  logout() {
+    this.authService.logout();
+  }
+  
 }
+

@@ -1,18 +1,42 @@
-<table border="1">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>Campo1</th>
-            <th>Campo2</th>
-            <th>Campo3</th>
-            <!-- Agrega más campos según el modelo -->
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-evento>
-        <tr>
-            <td>{{ evento.nombre_descripcion }}</td>
-            <td>{{ evento.desripcion }}</td>
-            <td>{{ evento.campo3 }}</td>
-            <!-- Agrega más campos según el modelo -->
-        </tr>
-    </ng-template>
-</table>
+<div class="container mx-auto p-4">
+    <table class="min-w-full border-collapse border border-gray-300 shadow-md rounded-lg">
+        <thead>
+            <tr class="bg-gray-200 text-gray-700 uppercase text-sm">
+                <th class="px-4 py-2 border border-gray-300">Nombre</th>
+                <th class="px-4 py-2 border border-gray-300">Descripción</th>
+                <th class="px-4 py-2 border border-gray-300">Fecha</th>
+                <th class="px-4 py-2 border border-gray-300">Tipo</th>
+                <th class="px-4 py-2 border border-gray-300">Categoría</th>
+                <th class="px-4 py-2 border border-gray-300">Ubicación</th>
+                <th class="px-4 py-2 border border-gray-300">Coordinador</th>
+                <th class="px-4 py-2 border border-gray-300">Ponente</th>
+                <th class="px-4 py-2 border border-gray-300">Moderador Necesario</th>
+                <th class="px-4 py-2 border border-gray-300">Moderador</th>
+                <th class="px-4 py-2 border border-gray-300">Participantes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let evento of eventos" class="hover:bg-gray-100">
+                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.nombre_evento }}</td>
+                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.descripcion }}</td>
+                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.fecha_evento | date: 'dd/MM/yyyy' }}</td>
+                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.tipo_evento }}</td>
+                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.categoria_evento?.nombre || 'Sin categoría' }}</td>
+                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.ubicacion }}</td>
+                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.coordinador }}</td>
+                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.ponente }}</td>
+                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.moderador_necesario }}</td>
+                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.moderador }}</td>
+                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.participantes }}</td>
+            </tr>
+        </tbody>
+    </table>
+  
+    <button 
+      (click)="logout()" 
+      class="mt-4 w-full py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
+    >
+      Cerrar sesión
+    </button>
+  </div>
+  

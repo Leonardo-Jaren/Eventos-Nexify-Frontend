@@ -8,11 +8,12 @@ export class Evento{
     fecha_evento: Date;
     categoria_evento?: CategoriaEvento; // Asumiendo que tienes una clase CategoriaEvento
     tipo_evento: 'Virtual' | 'Presencial' = 'Virtual';
+
     ubicacion?: string;
-    //coordinador?: Usuario; // Asumiendo que tienes una clase Usuario
-    //ponente?: Usuario; // Asumiendo que tienes una clase Usuario
-    //moderador_necesario: boolean = false;
+    coordinador?: Usuario; // Asumiendo que tienes una clase Usuario
+    ponente?: Usuario; // Asumiendo que tienes una clase Usuario
+    moderador_necesario: boolean = false;
     moderador?: Usuario; // Asumiendo que tienes una clase Usuario
-    //participantes: Participante[] = []; // Asumiendo que tienes una clase Participante
+    participantes: Participante[] = []; // Asumiendo que tienes una clase Participante
 
 }
