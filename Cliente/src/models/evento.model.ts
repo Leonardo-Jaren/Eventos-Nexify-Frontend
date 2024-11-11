@@ -1,19 +1,18 @@
 import { CategoriaEvento } from './categoria_evento.model';
 import { Usuario } from './usuario.model';
-import { Participante } from './participante.model';
+// import { Participante } from './participante.model';
 
-export class Evento{
+export class Evento {
     nombre_evento: string;
     descripcion: string;
     fecha_evento: Date;
-    categoria_evento?: CategoriaEvento; // Asumiendo que tienes una clase CategoriaEvento
-    tipo_evento: 'Virtual' | 'Presencial' = 'Virtual';
-
-    ubicacion?: string;
-    coordinador?: Usuario; // Asumiendo que tienes una clase Usuario
-    ponente?: Usuario; // Asumiendo que tienes una clase Usuario
-    moderador_necesario: boolean = false;
-    moderador?: Usuario; // Asumiendo que tienes una clase Usuario
-    participantes: Participante[] = []; // Asumiendo que tienes una clase Participante
-
-}
+    tipo_evento: string;
+    categoria_evento: CategoriaEvento[];
+    ubicacion: string;
+    coordinador: string;
+    ponente: string;
+    moderador: string;
+    moderador_necesario: boolean;
+    participantes: number; // Asegúrate de que la propiedad esté aquí con el tipo correcto
+    // Agrega otras propiedades si es necesario
+  }

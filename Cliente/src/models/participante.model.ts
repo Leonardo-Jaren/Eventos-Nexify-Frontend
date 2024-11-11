@@ -1,9 +1,9 @@
-import { Usuario } from './usuario.model';
+// import { Usuario } from './usuario.model';
 
-export class Participante extends Usuario {
-    constructor() {
-        super();
-        this.rol = this.roleChoices["Participante"];
-    }
+// export class Participante extends Usuario {
+//     constructor() {
+//         super();
+//         this.rol = this.roleChoices["Participante"];
+//     }
     
-}
+// }
