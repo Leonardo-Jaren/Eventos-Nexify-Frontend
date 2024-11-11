@@ -1,4 +1,3 @@
 export class CategoriaEvento {
-    nombreCategoria: string;
-
+    nombre: string;
 }
