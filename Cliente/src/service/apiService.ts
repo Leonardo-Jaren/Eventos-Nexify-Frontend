@@ -24,19 +24,25 @@ export class ApiService {
     }
 
     // ! Método para obtener los usuarios
-    getUsers(): Observable<Usuario[]> {
+    public getUsers(): Observable<Usuario[]> {
         return this.http.get<Usuario[]>(`${this.ApiUrl}usuario/`, this.getHttpOptions());
     }
 
     // ! Método para insertar un usuario
-    insertUser(usuario: Usuario): Observable<Usuario> {
+    public insertUser(usuario: Usuario): Observable<Usuario> {
         const body = JSON.stringify(usuario);
         return this.http.post<Usuario>(`${this.ApiUrl}usuario/`, body, this.getHttpOptions());
     }
 
     // ! Metodo para elminar usuario
-    deleteUser(usuario: Usuario): Observable<void> {
+    public deleteUser(usuario: Usuario): Observable<void> {
         return this.http.delete<void>(`${this.ApiUrl}usuario/${usuario.id}/`, this.getHttpOptions());
+    }
+
+    // ! Actualizar Usuario
+    public updateUser(usuario: Usuario): Observable<Usuario> {
+        let cuerpo = JSON.stringify(usuario);
+        return this.http.put<Usuario>(`${this.ApiUrl}usuario/${usuario.id}/`, cuerpo, this.getHttpOptions());
     }
 
     // ! Método para obtener los eventos

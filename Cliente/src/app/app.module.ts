@@ -15,7 +15,8 @@ import { UsersComponent } from './users/users.component'; // Módulo de formular
 import { TableModule } from 'primeng/table'; // Módulo de tabla de PrimeNG
 import { PanelModule } from 'primeng/panel';
 import { EventosComponent } from './eventos/eventos.component'; // Módulo de panel de PrimeNG
-import { DialogModule } from 'primeng/dialog';
+import { DialogModule } from 'primeng/dialog'; // Módulo de diálogo de PrimeNG
+import { ConfirmDialogModule } from 'primeng/confirmdialog'; // Módulo de diálogo de confirmación de PrimeNG
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { DialogModule } from 'primeng/dialog';
     TableModule, // Para tablas
     PanelModule, // Para paneles
     DialogModule, // Para diálogos
+    ConfirmDialogModule, // Para diálogos de confirmación
   ],
   providers: [
     provideClientHydration(),

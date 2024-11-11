@@ -9,6 +9,7 @@ export class Usuario {
     username: string;
     telefono: string;
     urlLinkedin: string;
+    urlGmail: string;
     rol: string;
     rango: number = 1;
     eventosAsistidos: number = 0;

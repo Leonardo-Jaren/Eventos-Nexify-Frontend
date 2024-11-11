@@ -1,4 +1,5 @@
 <!-- Tabla de usuarios -->
+<p-confirmDialog />
 <p-table [value]="users" [tableStyle]="{ 'min-width': '50rem' }" class="table-auto w-full text-center">
     <ng-template pTemplate="header">
         <tr class="bg-gray-100">
@@ -7,6 +8,7 @@
             <th class="p-2 border-b">Rol</th>
             <th class="p-2 border-b">Teléfono</th>
             <th class="p-2 border-b">LinkedIn</th>
+            <th class="p-2 border-b">gmail</th>
             <th class="p-2 border-b">Rango</th>
             <th class="p-2 border-b">Eventos Asistidos</th>
             <th class="p-2 border-b">Acciones</th>
@@ -43,7 +45,7 @@
   </button>
   
   <!-- Cuadro de diálogo para crear/editar usuario -->
-  <p-dialog header="Editar Perfil" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }" class="rounded-lg">
+  <p-dialog header="{{tituloDialogo}}" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }" class="rounded-lg">
       <span class="block text-gray-600 mb-5">Actualiza la información del usuario.</span>
       
       <!-- Campo para el nombre de usuario -->
@@ -77,6 +79,12 @@
           <label for="linkedin" class="font-semibold w-24">LinkedIn</label>
           <input pInputText id="linkedin" [(ngModel)]="nuevo.urlLinkedin" class="flex-auto p-2 border border-gray-300 rounded-md" />
       </div>
+
+      <!-- Campo para Gmail -->
+        <div class="flex items-center gap-3 mb-3">
+            <label for="gmail" class="font-semibold w-24">Gmail</label>
+            <input pInputText id="gmail" [(ngModel)]="nuevo.urlGmail" class="flex-auto p-2 border border-gray-300 rounded-md" />
+        </div>
       
       <!-- Campo para el rango -->
       <div class="flex items-center gap-3 mb-3">
