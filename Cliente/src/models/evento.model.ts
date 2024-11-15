@@ -15,6 +15,9 @@ export class Evento {
   moderador?: number | null; // ID del moderador, opcional
   categoria_evento: string; // Added property
   participantes?: number[]; // IDs de los participantes opcionalmente
+  imagen: string; // URL de la imagen opcional
+  hora_inicio?: string; // Hora de inicio en formato HH:MM:SS
+  hora_fin?: string; // Hora de fin en formato HH:MM:SS
 
   // Campos calculados en el backend, no se envían al backend pero pueden recibirse
   estado_evento?: 'Próximo' | 'En Vivo' | 'Culminado';

@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
   { path: 'eventos', component: EventosComponent, canActivate: [AuthGuard] },
+  { path: 'crear-evento', component: EventosComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' }, // Redirección al cargar la aplicación
   { path: '**', redirectTo: 'auth/login' } // Redirección en caso de rutas no encontradas
 ];

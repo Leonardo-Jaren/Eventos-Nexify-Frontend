@@ -1,43 +1,31 @@
 <app-navigation></app-navigation>
 <div class="container mx-auto p-4 pt-24">
-    <table class="min-w-full border-collapse border border-gray-300 shadow-md rounded-lg">
-        <thead>
-            <tr class="bg-gray-200 text-gray-700 uppercase text-sm">
-                <th class="px-4 py-2 border border-gray-300">Nombre</th>
-                <th class="px-4 py-2 border border-gray-300">Descripción</th>
-                <th class="px-4 py-2 border border-gray-300">Fecha</th>
-                <th class="px-4 py-2 border border-gray-300">Tipo</th>
-                <th class="px-4 py-2 border border-gray-300">Categoría</th>
-                <th class="px-4 py-2 border border-gray-300">Ubicación</th>
-                <th class="px-4 py-2 border border-gray-300">Coordinador</th>
-                <th class="px-4 py-2 border border-gray-300">Ponente</th>
-                <th class="px-4 py-2 border border-gray-300">Moderador Necesario</th>
-                <th class="px-4 py-2 border border-gray-300">Moderador</th>
-                <!-- <th class="px-4 py-2 border border-gray-300">Participantes</th> -->
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let evento of eventos" class="hover:bg-gray-100">
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.nombre_evento }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.descripcion }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.fecha_evento | date: 'dd/MM/yyyy' }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.tipo_evento }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.categoria_evento || 'Sin categoría' }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.ubicacion }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.coordinador }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.ponente }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.moderador_necesario }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.moderador }}</td>
-                <!-- <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.participantes }}</td> -->
-            </tr>
-        </tbody>
-    </table>
+    <h2 class="text-2xl font-bold mb-4">Eventos</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Card Component for Each Event -->
+        <div *ngFor="let evento of eventos" class="bg-white rounded-lg shadow-md overflow-hidden">
+            <img src="assets/event-placeholder.jpg" alt="Evento imagen" class="w-full h-32 sm:h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-lg font-semibold text-gray-800">{{ evento.nombre_evento }}</h3>
+                <p class="text-sm text-gray-600 mt-2">{{ evento.descripcion }}</p>
+                <p class="text-xs text-gray-500 mt-2">Fecha: {{ evento.fecha_evento | date: 'dd/MM/yyyy' }}</p>
+                <p class="text-xs text-gray-500">Tipo: {{ evento.tipo_evento }}</p>
+                <p class="text-xs text-gray-500">Categoría: {{ evento.categoria_evento || 'Sin categoría' }}</p>
+                <p class="text-xs text-gray-500">Ubicación: {{ evento.ubicacion }}</p>
+                <p class="text-xs text-gray-500">Coordinador: {{ evento.coordinador }}</p>
+                <p class="text-xs text-gray-500">Ponente: {{ evento.ponente }}</p>
+                <p class="text-xs text-gray-500">Moderador: {{ evento.moderador || 'No asignado' }}</p>
+                <div class="mt-4 flex justify-end">
+                    <button class="text-sm text-blue-500 hover:underline">Ver más</button>
+                </div>
+            </div>
+        </div>
+    </div>
   
     <button 
       (click)="logout()" 
-      class="mt-4 w-full py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
+      class="mt-8 w-full py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
     >
       Cerrar sesión
     </button>
-  </div>
-  
+</div>

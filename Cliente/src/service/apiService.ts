@@ -43,10 +43,16 @@ export class ApiService {
     public updateUser(usuario: Usuario): Observable<Usuario> {
         let cuerpo = JSON.stringify(usuario);
         return this.http.put<Usuario>(`${this.ApiUrl}usuario/${usuario.id}/`, cuerpo, this.getHttpOptions());
-    }
+    }   
 
     // ! Método para obtener los eventos
     getEventos(): Observable<Evento[]> {
         return this.http.get<Evento[]>(`${this.ApiUrl}eventos/`, this.getHttpOptions());
+    }
+
+    // ! Método para insertar un evento
+    insertEvento(evento: Evento): Observable<Evento> {
+        const body = JSON.stringify(evento);
+        return this.http.post<Evento>(`${this.ApiUrl}eventos/`, body, this.getHttpOptions());
     }
 }
