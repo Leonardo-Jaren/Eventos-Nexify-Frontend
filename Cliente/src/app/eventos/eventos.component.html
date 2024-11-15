@@ -28,4 +28,79 @@
     >
       Cerrar sesión
     </button>
+  </div>
+ 
+
+
+
+  <div class="min-h-screen flex items-center justify-center ">
+    <div class="max-w-lg w-full mx-auto p-6 bg-customwhite rounded-lg shadow-lg">
+        <h2 class="text-2xl font-semibold text-center mb-4 text-customGray font-outfit">Modificar evento</h2>
+        
+        <form>
+            <label class="block mb-2 text-customGray font-outfit">Nombre del evento</label>
+            <input type="text" placeholder="Nombre del evento" class="w-full mb-4 p-2 border rounded text-customGray placeholder-gray-500">
+
+            <div class="flex space-x-4 mb-4">
+                <div class="flex-1">
+                    <label class="block mb-2 text-customGray font-outfit">Fecha</label>
+                    <input type="date" class="w-full p-2 border rounded text-customGray placeholder-gray-500">
+                </div>
+            
+                <div class="flex-1">
+                    <label class="block mb-2 text-customGray font-outfit">Hora</label>
+                    <input type="time" class="w-full p-2 border rounded text-customGray placeholder-gray-500">
+                </div>
+            </div>            
+
+            <label class="block mb-2 text-customGray font-outfit">¿Es presencial o virtual?</label>
+            <select class="w-full mb-4 p-2 border rounded text-customGray">
+                <option>Presencial</option>
+                <option>Virtual</option>
+            </select>
+
+            <label class="block mb-2 text-customGray font-outfit">Agregar moderador</label>
+            <input type="text" placeholder="Agregar moderador" class="w-full mb-4 p-2 border rounded text-customGray placeholder-gray-500">
+
+            <label class="block mb-2 text-customGray font-outfit">¿Qué categoría es?</label>
+            <select class="w-full mb-4 p-2 border rounded text-customGray">
+                <option>Programacion</option>
+                <option>Inteligencia Artificial</option>
+                <option>Innovación</option>
+                <option>Investigación</option>
+                <option>Big Data</option>
+                <option>Talleres</option>
+                <option>Emprendimiento</option>
+                <option>Networking</option>
+                <option>Seminario Informativo</option>
+                <!-- Agrega más opciones aquí -->
+            </select>
+
+            <label class="block mb-2 text-customGray font-outfit">¿Qué tema será expuesto?</label>
+            <input type="text" placeholder="Título y descripción" class="w-full mb-4 p-2 border rounded text-customGray placeholder-gray-500">
+
+            <div class="flex justify-between mt-4">
+                <button type="button" (click)="onModifyEvent()" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-customBlueBotton font-outfit">Modificar evento</button>
+                <button type="button" (click)="onCancelEvent()" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-customBlueBotton font-outfit">Cancelar evento</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Componente de Modal -->
+    <app-modal-mod-event *ngIf="showModal"
+               [modalTitle]="modalTitle"
+               [modalMessage]="modalMessage"
+               (confirm)="handleConfirm()"
+               (cancel)="handleCancel()">
+    </app-modal-mod-event>
+
+
+
+
+    <app-create-event></app-create-event>
+
+
+
+   
+
 </div>

@@ -22,6 +22,7 @@ export class NavigationComponent implements OnInit {
     });
   }
 
+  
   ngOnInit(): void {
     this.role = this.authService.getUserRole();
   }
