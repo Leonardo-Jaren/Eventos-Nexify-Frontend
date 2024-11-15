@@ -47,14 +47,19 @@ export class ApiService {
 
     // ! Método para obtener los eventos
     getEventos(): Observable<Evento[]> {
+        return this.http.get<Evento[]>(`${this.ApiUrl}eventos/`, this.getHttpOptions());
+    }
+
+     // UPDATE evento
+     updateEvento(evento: Evento): Observable<Evento> {
       const token = localStorage.getItem('token');
       const httpOptions = {
           headers: new HttpHeaders({
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}` // Asegúrate de que tu backend espera el token en este formato
+              'Authorization': `Bearer ${token}`
           })
       };
-      return this.http.get<Evento[]>(this.ApiUrl + 'eventos/', httpOptions);
+      return this.http.put<Evento>(`${this.ApiUrl}eventos/${evento.id}/`, evento, httpOptions);
   }
 
 

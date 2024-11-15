@@ -1,4 +1,5 @@
-<div class="container mx-auto p-4">
+<app-navigation></app-navigation>
+<div class="container mx-auto p-4 pt-24">
     <table class="min-w-full border-collapse border border-gray-300 shadow-md rounded-lg">
         <thead>
             <tr class="bg-gray-200 text-gray-700 uppercase text-sm">
@@ -12,7 +13,7 @@
                 <th class="px-4 py-2 border border-gray-300">Ponente</th>
                 <th class="px-4 py-2 border border-gray-300">Moderador Necesario</th>
                 <th class="px-4 py-2 border border-gray-300">Moderador</th>
-                <th class="px-4 py-2 border border-gray-300">Participantes</th>
+                <!-- <th class="px-4 py-2 border border-gray-300">Participantes</th> -->
             </tr>
         </thead>
         <tbody>
@@ -21,13 +22,13 @@
                 <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.descripcion }}</td>
                 <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.fecha_evento | date: 'dd/MM/yyyy' }}</td>
                 <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.tipo_evento }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.categoria_evento?.nombre || 'Sin categoría' }}</td>
+                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.categoria_evento || 'Sin categoría' }}</td>
                 <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.ubicacion }}</td>
                 <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.coordinador }}</td>
                 <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.ponente }}</td>
                 <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.moderador_necesario }}</td>
                 <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.moderador }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.participantes }}</td>
+                <!-- <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.participantes }}</td> -->
             </tr>
         </tbody>
     </table>
@@ -37,4 +38,6 @@
       class="mt-4 w-full py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
     >
       Cerrar sesión
-    </button>
+    </button>
+  </div>
+  
