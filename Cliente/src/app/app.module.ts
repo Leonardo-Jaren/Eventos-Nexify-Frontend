@@ -20,7 +20,8 @@ import { HomeComponent } from './home/home.component';
 import { CalendarioComponent } from './calendario/calendario.component';
 import { SubscripcionesComponent } from './subscripciones/subscripciones.component';
 import { NavigationComponent } from './navigation/navigation.component'; // Módulo de diálogo de confirmación de PrimeNG
-import { FullCalendarModule } from '@fullcalendar/angular'; // Importa FullCalendar
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { ModalModEventComponent } from './modal-mod-event/modal-mod-event.component'; // Importa FullCalendar
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // Importa FullCalen
     CalendarioComponent,
     SubscripcionesComponent,
     NavigationComponent,
+    ModalModEventComponent,
   ],
   imports: [
     BrowserModule,
