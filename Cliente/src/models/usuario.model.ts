@@ -5,6 +5,7 @@ export class Usuario {
         Ponente: 'Ponente',
         Moderador_Solicitud: 'Moderador_Solicitud',
     };
+    id: number;
     username: string;
     telefono: string;
     url_linkedin: string;

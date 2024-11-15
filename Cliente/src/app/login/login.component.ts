@@ -1,28 +1,28 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../service/auth';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  providers: [AuthService]
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   usuario: string = '';
   clave: string = '';
+  errorMessage: string = '';  // Variable para mostrar el mensaje de error
 
-  ngOnInit() {
-    
-  }
+  constructor(private auth: AuthService, private router: Router, private route: ActivatedRoute) {}
 
-  constructor(private auth: AuthService, private router: Router) {}
-  
   ingresar() {
-    this.auth.login(this.usuario, this.clave);
-  }
-
-  onUser() {
-    this.router.navigate(['/users']);
+    this.auth.login(this.usuario, this.clave).subscribe(
+      () => {
+        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/home';
+        this.router.navigateByUrl(returnUrl);
+      },
+      error => {
+        this.errorMessage = error.error.error || 'Error de autenticación';
+      }
+    );
   }
 }

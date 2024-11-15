@@ -14,5 +14,4 @@ export class Evento {
     moderador: string;
     moderador_necesario: boolean;
     participantes: number; // Asegúrate de que la propiedad esté aquí con el tipo correcto
-    // Agrega otras propiedades si es necesario
   }

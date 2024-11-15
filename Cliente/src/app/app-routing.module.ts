@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NexAppComponent } from './nex-app/nex-app.component';
 import { LoginComponent } from './login/login.component';
 import { UsersComponent } from './users/users.component';
 import { AuthGuard } from '../service/guard';
 import { EventosComponent } from './eventos/eventos.component';
+import { HomeComponent } from './home/home.component';
+import { CalendarioComponent } from './calendario/calendario.component';
 
 const routes: Routes = [
-  { path: 'nex-app', component: NexAppComponent },
+  { path: '', component:  LoginComponent},
+  { path: 'home', component: HomeComponent},
+  { path: 'calendario', component: CalendarioComponent },
   { path: 'login', component: LoginComponent },
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
   { path: 'eventos', component: EventosComponent, canActivate: [AuthGuard] },
