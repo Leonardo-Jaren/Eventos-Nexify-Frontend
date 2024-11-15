@@ -20,7 +20,8 @@ import { HomeComponent } from './home/home.component';
 import { CalendarioComponent } from './calendario/calendario.component';
 import { SubscripcionesComponent } from './subscripciones/subscripciones.component';
 import { NavigationComponent } from './navigation/navigation.component'; // Módulo de diálogo de confirmación de PrimeNG
-import { FullCalendarModule } from '@fullcalendar/angular'; // Importa FullCalendar
+import { FullCalendarModule } from '@fullcalendar/angular'; // Importa FullCalendar --INSTALAR CALENDAR
+
 
 @NgModule({
   declarations: [
