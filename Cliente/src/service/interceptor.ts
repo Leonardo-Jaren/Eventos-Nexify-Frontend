@@ -10,13 +10,13 @@ export class Interceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let request = req;
         const token = this.authService.getToken();
-        const apiKey = 'fe1147108cf466dc2085a0cf14757bc1a4974a11';
+        const apiKey = '1cf535c7f0f585ab0e4a29419d62c048296a4cd1';
 
         if (token) {
             request = req.clone({
                 setHeaders: {
                     Authorization: `Token ${token}`,
-                    'X-API-KEY': apiKey
+                    'API-KEY': apiKey
                 }
             });
         }

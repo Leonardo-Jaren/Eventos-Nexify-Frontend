@@ -1,0 +1,69 @@
+<app-navigation></app-navigation>
+<!-- Contenedor principal -->
+<div class="bg-gray-100 min-h-screen p-4 space-y-6 pt-24">  
+  <!-- Contenedor principal con imagen de fondo -->
+  <div class="relative bg-cover bg-center h-80 flex items-center" style="background-image: url('assets/fondo_ponencia.jpg');">
+    <!-- Filtro oscuro para mejorar la legibilidad -->
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+
+    <!-- Contenedor de contenido centrado con space-evenly -->
+    <div class="relative z-10 flex flex-col lg:flex-row items-center justify-evenly w-full px-4 lg:px-20">
+      <!-- Título del proyecto -->
+      <div class="text-center lg:text-left mb-4 lg:mb-0">
+        <h1 class="text-4xl lg:text-6xl font-serif text-white font-bold italic">Nexify</h1>
+      </div>         
+
+      <!-- Texto principal -->
+      <div class="text-center lg:text-left max-w-lg">
+        <p class="mt-2 lg:mt-4 text-white">
+          Nuestro sistema está pensado para facilitarte el acceso a eventos que no solo informan, sino que también inspiran y fomentan el crecimiento personal y profesional. Cada evento es una oportunidad para conectar con expertos en diversas áreas, explorar nuevas ideas y compartir experiencias con una comunidad apasionada por el aprendizaje continuo.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barra de categorías con íconos circulares y nombres -->
+  <div class="flex flex-nowrap justify-evenly items-center gap-4 mt-4 w-full overflow-x-auto">
+    <div class="flex flex-col items-center cursor-pointer text-gray-700 hover:text-black" (click)="navEventos()">
+      <i class="fas fa-calendar-alt bg-red-500 text-white p-4 rounded-full text-2xl"></i>
+      <span class="mt-2 text-sm font-semibold">Eventos</span>
+    </div>
+  
+    <div class="flex flex-col items-center cursor-pointer text-gray-700 hover:text-black" (click)="navCalendario()">
+      <i class="fas fa-calendar bg-green-500 text-white p-4 rounded-full text-2xl"></i>
+      <span class="mt-2 text-sm font-semibold">Calendario</span>
+    </div>
+  
+    <div class="flex flex-col items-center cursor-pointer text-gray-700 hover:text-black" (click)="navInscripciones()">
+      <i class="fas fa-user-check bg-purple-500 text-white p-4 rounded-full text-2xl"></i>
+      <span class="mt-2 text-sm font-semibold">Inscripciones</span>
+    </div>
+  </div>
+
+  <!-- Sección de contenido reciente -->
+  <div>
+    <h3 class="text-lg font-bold mb-4">Eventos recientes</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div class="bg-white rounded-lg shadow-lg p-4">
+        <img src="assets/event1.jpg" alt="Evento 1" class="rounded mb-2 w-full">
+        <p class="font-semibold">Evento de IA</p>
+        <p class="text-sm text-gray-500">20k vistas</p>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-4">
+        <img src="assets/event2.jpg" alt="Evento 2" class="rounded mb-2 w-full">
+        <p class="font-semibold">Charla de Big Data</p>
+        <p class="text-sm text-gray-500">15k vistas</p>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-4">
+        <img src="assets/event3.jpg" alt="Evento 3" class="rounded mb-2 w-full">
+        <p class="font-semibold">Redes Sociales</p>
+        <p class="text-sm text-gray-500">30k vistas</p>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-4">
+        <img src="assets/event4.jpg" alt="Evento 4" class="rounded mb-2 w-full">
+        <p class="font-semibold">Taller de UX</p>
+        <p class="text-sm text-gray-500">25k vistas</p>
+      </div>
+    </div>
+  </div>
+</div>

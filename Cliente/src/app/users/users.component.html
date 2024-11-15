@@ -1,14 +1,53 @@
+<app-navigation></app-navigation>
 <div class="flex justify-center items-center min-h-screen bg-gray-100">
-    <div class="bg-white p-8 rounded-lg shadow-lg">
-      <h1 class="text-2xl font-semibold mb-4">Bienvenido, usuario</h1>
-      <p class="text-gray-600 mb-6">Puedes cerrar sesión usando el botón de abajo:</p>
-      
-      <button 
-        (click)="logout()" 
-        class="w-full py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none"
-      >
-        Cerrar sesión
-      </button>
-    </div>
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
+    <h1 class="text-2xl font-semibold mb-4 text-center">Bienvenido, usuario</h1>
+    <p class="text-gray-600 mb-6 text-center">A continuación, puedes ver la lista de usuarios y cerrar sesión cuando lo desees:</p>
+    
+    <table class="w-full mb-6 border-collapse border border-gray-300 rounded-lg">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border border-gray-300 p-2 text-center">Nombre</th>
+          <th class="border border-gray-300 p-2 text-center">Rol</th>
+          <th class="border border-gray-300 p-2 text-center">Teléfono</th>
+          <th class="border border-gray-300 p-2 text-center">LinkedIn</th>
+          <th class="border border-gray-300 p-2 text-center">Rango</th>
+          <th class="border border-gray-300 p-2 text-center">Eventos Asistidos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios" class="odd:bg-white even:bg-gray-100">
+          <!-- Nombre -->
+          <td class="border border-gray-300 p-2 text-center">{{ usuario.username || 'Sin nombre' }}</td>
+          
+          <!-- Rol -->
+          <td class="border border-gray-300 p-2 text-center">{{ usuario.rol || 'Sin rol' }}</td>
+          
+          <!-- Teléfono -->
+          <td class="border border-gray-300 p-2 text-center">{{ usuario.telefono || 'No disponible' }}</td>
+          
+          <!-- LinkedIn -->
+          <td class="border border-gray-300 p-2 text-center">
+            <a *ngIf="usuario.url_linkedin" [href]="usuario.url_linkedin" target="_blank" class="text-blue-500 hover:underline">
+              Ver LinkedIn
+            </a>
+            <span *ngIf="!usuario.url_linkedin" class="text-gray-500">No disponible</span>
+          </td>
+          
+          <!-- Rango -->
+          <td class="border border-gray-300 p-2 text-center">{{ usuario.rango }}</td>
+          
+          <!-- Eventos Asistidos -->
+          <td class="border border-gray-300 p-2 text-center">{{ usuario.eventos_asistidos }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button 
+      (click)="logout()" 
+      class="w-full py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none"
+    >
+      Cerrar sesión
+    </button>
   </div>
-  
+</div>

@@ -9,40 +9,53 @@ import { Evento } from "../models/evento.model";
 })
 export class ApiService {
     private ApiUrl = "http://127.0.0.1:8000/api/"; // URL de la API
-    private httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        })
-    };
 
     constructor(private http: HttpClient) {}
 
-    // GET all users
-    getUsers(): Observable<Usuario[]> {
-        return this.http.get<Usuario[]>(this.ApiUrl + 'usuario');
+    // ! Configura los encabezados de autenticación si el token está presente
+    private getHttpOptions(): { headers: HttpHeaders } {
+        const token = localStorage.getItem('token');
+        return {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                ...(token ? { 'Authorization': `token ${token}` } : {})
+            })
+        };
     }
 
-    // GET all eventos
+    // ! Método para obtener los usuarios
+    public getUsers(): Observable<Usuario[]> {
+        return this.http.get<Usuario[]>(`${this.ApiUrl}usuario/`, this.getHttpOptions());
+    }
+
+    // ! Método para insertar un usuario
+    public insertUser(usuario: Usuario): Observable<Usuario> {
+        const body = JSON.stringify(usuario);
+        return this.http.post<Usuario>(`${this.ApiUrl}usuario/`, body, this.getHttpOptions());
+    }
+
+    // ! Metodo para elminar usuario
+    public deleteUser(usuario: Usuario): Observable<void> {
+        return this.http.delete<void>(`${this.ApiUrl}usuario/${usuario.id}/`, this.getHttpOptions());
+    }
+
+    // ! Actualizar Usuario
+    public updateUser(usuario: Usuario): Observable<Usuario> {
+        let cuerpo = JSON.stringify(usuario);
+        return this.http.put<Usuario>(`${this.ApiUrl}usuario/${usuario.id}/`, cuerpo, this.getHttpOptions());
+    }
+
+    // ! Método para obtener los eventos
     getEventos(): Observable<Evento[]> {
-        const token = localStorage.getItem('token');
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` // Asegúrate de que tu backend espera el token en este formato
-            })
-        };
-        return this.http.get<Evento[]>(this.ApiUrl + 'eventos/', httpOptions);
-    }
+      const token = localStorage.getItem('token');
+      const httpOptions = {
+          headers: new HttpHeaders({
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}` // Asegúrate de que tu backend espera el token en este formato
+          })
+      };
+      return this.http.get<Evento[]>(this.ApiUrl + 'eventos/', httpOptions);
+  }
 
-    // UPDATE evento
-    updateEvento(evento: Evento): Observable<Evento> {
-        const token = localStorage.getItem('token');
-        const httpOptions = {
-            headers: new HttpHeaders({
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            })
-        };
-        return this.http.put<Evento>(`${this.ApiUrl}eventos/${evento.id}/`, evento, httpOptions);
-    }
+
 }
