@@ -32,51 +32,6 @@
         </tbody>
     </table>
   
-
-
-    <div id="crear evento">
-        <!-- Botón para abrir el modal -->
-        <button 
-            class="mt-4 w-full py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            (click)="openModal()"
-        >
-            Crear evento
-        </button>
-
-        <!-- El Modal -->
-        <div *ngIf="isModalOpen" class="fixed z-10 inset-0 overflow-y-auto">
-            <div class="flex items-center justify-center min-h-screen">
-                <div class="fixed inset-0 bg-gray-500 opacity-75"></div>
-                <div class="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
-                    <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                        <h3 class="text-lg leading-6 font-medium text-gray-900">
-                            Crear nuevo evento
-                        </h3>
-                        <div class="mt-2">
-                            <div>
-                                <label for="nombre_evento" class="block text
-                                -sm font-medium text-gray-700">Nombre del evento</label>
-                                <input
-                                id="nombre_evento" type="text" class="mt-1 focus:ring-ind
-                                igo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                                [(ngModel)]="nombre_evento"
-                                >
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                        <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-600 sm:ml-3 sm:w-auto sm:text-sm">
-                            Guardar
-                        </button>
-                        <button type="button" (click)="closeModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                            Cancelar
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <button 
       (click)="logout()" 
       class="mt-4 w-full py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
@@ -85,12 +40,6 @@
     </button>
   </div>
  
-  
-
-
-
-
-
 
 
 
@@ -148,10 +97,20 @@
     </div>
 
     <!-- Componente de Modal -->
-    <app-modal *ngIf="showModal"
+    <app-modal-mod-event *ngIf="showModal"
                [modalTitle]="modalTitle"
                [modalMessage]="modalMessage"
                (confirm)="handleConfirm()"
                (cancel)="handleCancel()">
-    </app-modal>
+    </app-modal-mod-event>
+
+
+
+
+    <app-create-event></app-create-event>
+
+
+
+   
+
 </div>

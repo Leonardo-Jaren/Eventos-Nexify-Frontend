@@ -10,6 +10,7 @@ import { AuthService } from '../../service/auth';
 })
 export class EventosComponent {
   eventos: Evento[];
+  
   constructor(private authService: AuthService, private cliente: ApiService) {}
 
   isModalOpen: boolean = false;
