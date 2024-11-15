@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NexAppComponent } from './nex-app/nex-app.component';
@@ -15,8 +15,6 @@ import { UsersComponent } from './users/users.component'; // Módulo de formular
 import { TableModule } from 'primeng/table'; // Módulo de tabla de PrimeNG
 import { PanelModule } from 'primeng/panel';
 import { EventosComponent } from './eventos/eventos.component'; // Módulo de panel de PrimeNG
-
-
 
 @NgModule({
   declarations: [
@@ -41,6 +39,7 @@ import { EventosComponent } from './eventos/eventos.component'; // Módulo de pa
   ],
   providers: [
     provideClientHydration(),
+    provideHttpClient(withFetch()) // Configura HttpClient para usar fetch
   ],
   bootstrap: [AppComponent]
 })

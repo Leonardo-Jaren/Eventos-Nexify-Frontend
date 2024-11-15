@@ -1,42 +1,85 @@
 <div class="container mx-auto p-4">
-    <table class="min-w-full border-collapse border border-gray-300 shadow-md rounded-lg">
-        <thead>
-            <tr class="bg-gray-200 text-gray-700 uppercase text-sm">
-                <th class="px-4 py-2 border border-gray-300">Nombre</th>
-                <th class="px-4 py-2 border border-gray-300">Descripción</th>
-                <th class="px-4 py-2 border border-gray-300">Fecha</th>
-                <th class="px-4 py-2 border border-gray-300">Tipo</th>
-                <th class="px-4 py-2 border border-gray-300">Categoría</th>
-                <th class="px-4 py-2 border border-gray-300">Ubicación</th>
-                <th class="px-4 py-2 border border-gray-300">Coordinador</th>
-                <th class="px-4 py-2 border border-gray-300">Ponente</th>
-                <th class="px-4 py-2 border border-gray-300">Moderador Necesario</th>
-                <th class="px-4 py-2 border border-gray-300">Moderador</th>
-                <th class="px-4 py-2 border border-gray-300">Participantes</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let evento of eventos" class="hover:bg-gray-100">
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.nombre_evento }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.descripcion }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.fecha_evento | date: 'dd/MM/yyyy' }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.tipo_evento }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.categoria_evento?.nombre || 'Sin categoría' }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.ubicacion }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.coordinador }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.ponente }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.moderador_necesario }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.moderador }}</td>
-                <td class="px-4 py-2 border border-gray-300 text-center">{{ evento.participantes }}</td>
-            </tr>
-        </tbody>
-    </table>
-  
-    <button 
-      (click)="logout()" 
+  <table class="min-w-full border-collapse border border-gray-300 shadow-md rounded-lg">
+      <thead>
+          <tr class="bg-gray-200 text-gray-700 uppercase text-sm">
+              <th class="px-4 py-2 border border-gray-300">Nombre</th>
+              <th class="px-4 py-2 border border-gray-300">Descripción</th>
+              <th class="px-4 py-2 border border-gray-300">Fecha</th>
+              <th class="px-4 py-2 border border-gray-300">Tipo</th>
+              <th class="px-4 py-2 border border-gray-300">Categoría</th>
+              <th class="px-4 py-2 border border-gray-300">Ubicación</th>
+              <th class="px-4 py-2 border border-gray-300">Coordinador</th>
+              <th class="px-4 py-2 border border-gray-300">Ponente</th>
+              <th class="px-4 py-2 border border-gray-300">Moderador Necesario</th>
+              <th class="px-4 py-2 border border-gray-300">Moderador</th>
+              <th class="px-4 py-2 border border-gray-300">Participantes</th>
+              <th class="px-4 py-2 border border-gray-300">Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let evento of eventos; let i = index" class="hover:bg-gray-100">
+              <td class="px-4 py-2 border border-gray-300 text-center">
+                  <input *ngIf="editableRow === i" [(ngModel)]="evento.nombre_evento" class="w-full text-center border-b border-gray-300" />
+                  <span *ngIf="editableRow !== i">{{ evento.nombre_evento }}</span>
+              </td>
+              <td class="px-4 py-2 border border-gray-300 text-center">
+                  <input *ngIf="editableRow === i" [(ngModel)]="evento.descripcion" class="w-full text-center border-b border-gray-300" />
+                  <span *ngIf="editableRow !== i">{{ evento.descripcion }}</span>
+              </td>
+              <td class="px-4 py-2 border border-gray-300 text-center">
+                  <input *ngIf="editableRow === i" [(ngModel)]="evento.fecha_evento" type="date" class="w-full text-center border-b border-gray-300" />
+                  <span *ngIf="editableRow !== i">{{ evento.fecha_evento | date: 'dd/MM/yyyy' }}</span>
+              </td>
+              <td class="px-4 py-2 border border-gray-300 text-center">
+                <select *ngIf="editableRow === i" [(ngModel)]="evento.tipo_evento" class="w-full text-center border-b border-gray-300">
+                    <option value="Virtual">Virtual</option>
+                    <option value="Presencial">Presencial</option>
+                </select>
+                <span *ngIf="editableRow !== i">{{ evento.tipo_evento }}</span>
+            </td>
+
+              <td class="px-4 py-2 border border-gray-300 text-center">
+                <ng-container *ngIf="evento.categoria_evento">
+                  <input *ngIf="editableRow === i" [(ngModel)]="evento.categoria_evento.nombre" class="w-full text-center border-b border-gray-300" />
+                  <span *ngIf="editableRow !== i">{{ evento.categoria_evento.nombre || 'Sin categoría' }}</span>
+                </ng-container>
+                <span *ngIf="!evento.categoria_evento">Sin categoría</span>
+              </td>
+
+
+              <td class="px-4 py-2 border border-gray-300 text-center">
+                  <input *ngIf="editableRow === i" [(ngModel)]="evento.ubicacion" class="w-full text-center border-b border-gray-300" />
+                  <span *ngIf="editableRow !== i">{{ evento.ubicacion }}</span>
+              </td>
+              <td class="px-4 py-2 border border-gray-300 text-center">
+                  <input *ngIf="editableRow === i" [(ngModel)]="evento.coordinador" class="w-full text-center border-b border-gray-300" />
+                  <span *ngIf="editableRow !== i">{{ evento.coordinador }}</span>
+              </td>
+              <td class="px-4 py-2 border border-gray-300 text-center">
+                  <input *ngIf="editableRow === i" [(ngModel)]="evento.ponente" class="w-full text-center border-b border-gray-300" />
+                  <span *ngIf="editableRow !== i">{{ evento.ponente }}</span>
+              </td>
+              <td class="px-4 py-2 border border-gray-300 text-center">
+                  <input *ngIf="editableRow === i" [(ngModel)]="evento.moderador_necesario" class="w-full text-center border-b border-gray-300" />
+                  <span *ngIf="editableRow !== i">{{ evento.moderador_necesario }}</span>
+              </td>
+              <td class="px-4 py-2 border border-gray-300 text-center">
+                  <input *ngIf="editableRow === i" [(ngModel)]="evento.moderador" class="w-full text-center border-b border-gray-300" />
+                  <span *ngIf="editableRow !== i">{{ evento.moderador }}</span>
+              </td>
+                
+              <td class="px-4 py-2 border border-gray-300 text-center">
+                  <button *ngIf="editableRow !== i" (click)="enableEdit(i)" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Editar</button>
+                  <button *ngIf="editableRow === i" (click)="saveEdit(i)" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Guardar</button>
+                  <button *ngIf="editableRow === i" (click)="cancelEdit()" class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600">Cancelar</button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+<button
+      (click)="logout()"
       class="mt-4 w-full py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
     >
       Cerrar sesión
-    </button>
-  </div>
-  
+    </button>
