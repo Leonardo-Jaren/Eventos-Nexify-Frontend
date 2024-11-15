@@ -41,4 +41,8 @@ export class NavigationComponent implements OnInit {
   navHome() {
     this.router.navigate(['/home']);
   }
+
+  navCrearEvento() {
+    this.router.navigate(['/crear-evento']);
+  }
 }

@@ -3,15 +3,19 @@ import { Usuario } from './usuario.model';
 // import { Participante } from './participante.model';
 
 export class Evento {
-    nombre_evento: string;
-    descripcion: string;
-    fecha_evento: Date;
-    tipo_evento: string;
-    categoria_evento: CategoriaEvento[];
-    ubicacion: string;
-    coordinador: string;
-    ponente: string;
-    moderador: string;
-    moderador_necesario: boolean;
-    participantes: number; // Asegúrate de que la propiedad esté aquí con el tipo correcto
-  }
+  id?: number; // ID opcional, ya que no estará presente antes de que el evento se cree
+  nombre_evento: string;
+  descripcion: string;
+  fecha_evento: string; // Se almacenará en formato ISO (YYYY-MM-DDTHH:MM:SS)
+  tipo_evento: 'Virtual' | 'Presencial'; // Solo permite los valores especificados
+  ubicacion?: string; // Opcional, solo requerido si el evento es presencial
+  coordinador: number; // ID del coordinador
+  ponente: number; // ID del ponente
+  moderador_necesario: boolean;
+  moderador?: number | null; // ID del moderador, opcional
+  categoria_evento: string; // Added property
+  participantes?: number[]; // IDs de los participantes opcionalmente
+
+  // Campos calculados en el backend, no se envían al backend pero pueden recibirse
+  estado_evento?: 'Próximo' | 'En Vivo' | 'Culminado';
+}

@@ -1,27 +1,76 @@
-<div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-200 to-indigo-300">
-  <div class="w-full max-w-xs p-8 space-y-4 bg-white rounded-lg shadow-lg">
-    <h2 class="text-2xl font-semibold text-center text-gray-700">Iniciar sesión</h2>
+<div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-teal-600 from-50% to-sky-950 to-50%">
+  <!-- Reducir el tamaño del contenedor cambiando max-w-7xl a max-w-lg -->
+  <div class="w-full max-w-3xl p-4 bg-white rounded-lg shadow-lg flex overflow-hidden">
 
-    <!-- Mensaje de error -->
-    <div *ngIf="errorMessage" class="text-red-500 text-center">
-      {{ errorMessage }}
+    <!-- Sección de la imagen -->
+    <div class="hidden md:block md:w-1/2">
+      <img src="assets/fondo_login.jpg" alt="Background image" class="w-full h-full object-cover rounded-l-lg">
     </div>
 
-    <!-- Campo de usuario -->
-    <div>
-      <label class="block text-gray-700">Nombre</label>
-      <input type="text" [(ngModel)]="usuario" class="w-full p-2 bg-gray-100 rounded-lg" placeholder="Username" />
-    </div>
+    <!-- Sección del formulario -->
+    <div class="w-full md:w-1/2 p-6 space-y-4">
+      <div class="flex justify-center mb-4">
+        <!-- Ícono sin el círculo -->
+        <i class="pi pi-user text-blue-500 text-4xl"></i>
+      </div>
+      <h2 class="text-2xl font-semibold text-center text-gray-700">Iniciar sesión</h2>
 
-    <!-- Campo de contraseña -->
-    <div>
-      <label class="block text-gray-700">Contraseña</label>
-      <input type="password" [(ngModel)]="clave" class="w-full p-2 bg-gray-100 rounded-lg" placeholder="Password" />
-    </div>
+      <!-- Mensaje de error -->
+      <div *ngIf="errorMessage" class="text-red-500 text-center">
+        {{ errorMessage }}
+      </div>
 
-    <!-- Botón de acceso -->
-    <button (click)="ingresar()" class="w-full py-2 mt-4 text-white bg-blue-500 rounded-lg hover:bg-blue-600">
-      Acceder
-    </button>
+      <!-- Botón de Google -->
+      <button class="flex items-center justify-center w-full py-2 mb-4 bg-white border border-gray-300 rounded-lg shadow-md hover:bg-gray-50">
+        <img title="img" src="assets/logo_google.png" class="h-5 mr-4">
+        Continuar con Google
+      </button>
+
+      <!-- Línea divisoria -->
+      <div class="flex items-center my-4">
+        <hr class="flex-1 border-gray-300">
+        <span class="px-4 text-gray-500 text-sm">o</span>
+        <hr class="flex-1 border-gray-300">
+      </div>
+
+      <!-- Campo de Correo Electrónico -->
+      <div>
+        <label class="block text-gray-700">Correo electrónico</label>
+        <div class="flex items-center border-b border-gray-300 focus-within:border-blue-500">
+          <i class="pi pi-user ml-3 text-gray-400"></i>
+          <input
+            type="text"
+            [(ngModel)]="usuario"
+            class="w-full p-2 text-gray-700 bg-transparent focus:outline-none"
+            placeholder="example@udh.edu.pe"
+          />
+        </div>
+      </div>
+
+      <!-- Campo de Contraseña con Mostrar/Ocultar -->
+      <div>
+        <label class="block text-gray-700">Contraseña</label>
+        <div class="flex items-center border-b border-gray-300 focus-within:border-blue-500">
+          <i class="pi pi-lock ml-3 text-gray-400"></i>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="clave"
+            class="w-full p-2 text-gray-700 bg-transparent focus:outline-none"
+            placeholder="••••••••"
+          />
+          <button title="pass" type="button" (click)="togglePasswordVisibility()" class="ml-2 text-gray-500 focus:outline-none">
+            <i [ngClass]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Botón de Inicio de Sesión -->
+      <button
+        (click)="ingresar()"
+        class="w-full py-2 mt-4 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none"
+      >
+        INICIAR SESIÓN
+      </button>
+    </div>
   </div>
 </div>
