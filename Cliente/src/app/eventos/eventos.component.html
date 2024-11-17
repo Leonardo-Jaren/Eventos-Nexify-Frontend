@@ -1,106 +1,41 @@
 <app-navigation></app-navigation>
-<div class="container mx-auto p-4 pt-24">
-    <h2 class="text-2xl font-bold mb-4">Eventos</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <!-- Card Component for Each Event -->
-        <div *ngFor="let evento of eventos" class="bg-white rounded-lg shadow-md overflow-hidden">
-            <img src="assets/event-placeholder.jpg" alt="Evento imagen" class="w-full h-32 sm:h-48 object-cover">
-            <div class="p-4">
-                <h3 class="text-lg font-semibold text-gray-800">{{ evento.nombre_evento }}</h3>
-                <p class="text-sm text-gray-600 mt-2">{{ evento.descripcion }}</p>
-                <p class="text-xs text-gray-500 mt-2">Fecha: {{ evento.fecha_evento | date: 'dd/MM/yyyy' }}</p>
-                <p class="text-xs text-gray-500">Tipo: {{ evento.tipo_evento }}</p>
-                <p class="text-xs text-gray-500">Categoría: {{ evento.categoria_evento || 'Sin categoría' }}</p>
-                <p class="text-xs text-gray-500">Ubicación: {{ evento.ubicacion }}</p>
-                <p class="text-xs text-gray-500">Coordinador: {{ evento.coordinador }}</p>
-                <p class="text-xs text-gray-500">Ponente: {{ evento.ponente }}</p>
-                <p class="text-xs text-gray-500">Moderador: {{ evento.moderador || 'No asignado' }}</p>
-                <div class="mt-4 flex justify-end">
-                    <button class="text-sm text-blue-500 hover:underline">Ver más</button>
-                </div>
-            </div>
-        </div>
-    </div>
-  
-    <button 
-      (click)="logout()" 
-      class="mt-8 w-full py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
-    >
-      Cerrar sesión
-    </button>
+<div class="container mx-auto py-10">
+  <h2 class="text-3xl font-bold text-gray-800 text-center mb-8">Lista de Eventos</h2>
+
+  <div *ngIf="errorMessage" class="text-red-500 text-center">
+    {{ errorMessage }}
   </div>
- 
 
-
-
-  <div class="min-h-screen flex items-center justify-center ">
-    <div class="max-w-lg w-full mx-auto p-6 bg-customwhite rounded-lg shadow-lg">
-        <h2 class="text-2xl font-semibold text-center mb-4 text-customGray font-outfit">Modificar evento</h2>
-        
-        <form>
-            <label class="block mb-2 text-customGray font-outfit">Nombre del evento</label>
-            <input type="text" placeholder="Nombre del evento" class="w-full mb-4 p-2 border rounded text-customGray placeholder-gray-500">
-
-            <div class="flex space-x-4 mb-4">
-                <div class="flex-1">
-                    <label class="block mb-2 text-customGray font-outfit">Fecha</label>
-                    <input type="date" class="w-full p-2 border rounded text-customGray placeholder-gray-500">
-                </div>
-            
-                <div class="flex-1">
-                    <label class="block mb-2 text-customGray font-outfit">Hora</label>
-                    <input type="time" class="w-full p-2 border rounded text-customGray placeholder-gray-500">
-                </div>
-            </div>            
-
-            <label class="block mb-2 text-customGray font-outfit">¿Es presencial o virtual?</label>
-            <select class="w-full mb-4 p-2 border rounded text-customGray">
-                <option>Presencial</option>
-                <option>Virtual</option>
-            </select>
-
-            <label class="block mb-2 text-customGray font-outfit">Agregar moderador</label>
-            <input type="text" placeholder="Agregar moderador" class="w-full mb-4 p-2 border rounded text-customGray placeholder-gray-500">
-
-            <label class="block mb-2 text-customGray font-outfit">¿Qué categoría es?</label>
-            <select class="w-full mb-4 p-2 border rounded text-customGray">
-                <option>Programacion</option>
-                <option>Inteligencia Artificial</option>
-                <option>Innovación</option>
-                <option>Investigación</option>
-                <option>Big Data</option>
-                <option>Talleres</option>
-                <option>Emprendimiento</option>
-                <option>Networking</option>
-                <option>Seminario Informativo</option>
-                <!-- Agrega más opciones aquí -->
-            </select>
-
-            <label class="block mb-2 text-customGray font-outfit">¿Qué tema será expuesto?</label>
-            <input type="text" placeholder="Título y descripción" class="w-full mb-4 p-2 border rounded text-customGray placeholder-gray-500">
-
-            <div class="flex justify-between mt-4">
-                <button type="button" (click)="onModifyEvent()" class="bg-blue-700 text-white px-4 py-2 rounded hover:bg-customBlueBotton font-outfit">Modificar evento</button>
-                <button type="button" (click)="onCancelEvent()" class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-customBlueBotton font-outfit">Cancelar evento</button>
-            </div>
-        </form>
+  <div *ngIf="eventos.length > 0; else noEventos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div *ngFor="let evento of eventos" class="bg-white rounded-lg shadow-lg overflow-hidden">
+      <!-- Imagen del evento (si tiene URL) -->
+      <div class="h-48 bg-gray-200">
+        <img 
+          [src]="evento.imagen || 'assets/placeholder-image.jpg'" 
+          alt="Imagen del Evento" 
+          class="w-full h-full object-cover"
+        />
+      </div>
+      <!-- Información del evento -->
+      <div class="p-4">
+        <h3 class="text-lg font-bold text-gray-800 mb-2 truncate">{{ evento.nombreEvento }}</h3>
+        <p class="text-gray-600 text-sm mb-2 truncate">
+          <strong>Descripción:</strong> {{ evento.descripcion }}
+        </p>
+        <p class="text-gray-600 text-sm mb-2">
+          <strong>Fecha:</strong> {{ evento.fechaEvento | date: 'short' }}
+        </p>
+        <p class="text-gray-600 text-sm mb-2">
+          <strong>Tipo:</strong> {{ evento.tipoEvento }}
+        </p>
+        <p *ngIf="evento.tipoEvento === 'Presencial'" class="text-gray-600 text-sm">
+          <strong>Ubicación:</strong> {{ evento.ubicacion }}
+        </p>
+      </div>
     </div>
+  </div>
 
-    <!-- Componente de Modal -->
-    <app-modal-mod-event *ngIf="showModal"
-               [modalTitle]="modalTitle"
-               [modalMessage]="modalMessage"
-               (confirm)="handleConfirm()"
-               (cancel)="handleCancel()">
-    </app-modal-mod-event>
-
-
-
-
-    <app-create-event></app-create-event>
-
-
-
-   
-
+  <ng-template #noEventos>
+    <p class="text-gray-500 text-center">No hay eventos registrados.</p>
+  </ng-template>
 </div>

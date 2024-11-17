@@ -1,24 +1,77 @@
+import { Coordinador } from './coordinador.model';
+import { Ponente } from './ponente.model';
+import { Participante } from './participante.model';
+import { ModeradorSolicitud } from './moderador_solicitud.model';
 import { CategoriaEvento } from './categoria_evento.model';
-import { Usuario } from './usuario.model';
-// import { Participante } from './participante.model';
 
 export class Evento {
-  id?: number; // ID opcional, ya que no estará presente antes de que el evento se cree
-  nombre_evento: string;
+  id?: number;
+  nombreEvento: string;
   descripcion: string;
-  fecha_evento: string; // Se almacenará en formato ISO (YYYY-MM-DDTHH:MM:SS)
-  tipo_evento: 'Virtual' | 'Presencial'; // Solo permite los valores especificados
-  ubicacion?: string; // Opcional, solo requerido si el evento es presencial
-  coordinador: number; // ID del coordinador
-  ponente: number; // ID del ponente
-  moderador_necesario: boolean;
-  moderador?: number | null; // ID del moderador, opcional
-  categoria_evento: string; // Added property
-  participantes?: number[]; // IDs de los participantes opcionalmente
-  imagen: string; // URL de la imagen opcional
-  hora_inicio?: string; // Hora de inicio en formato HH:MM:SS
-  hora_fin?: string; // Hora de fin en formato HH:MM:SS
+  fechaEvento: Date | string;
+  categoriaEvento?: CategoriaEvento | null;
+  tipoEvento: 'Virtual' | 'Presencial';
+  ubicacion?: string | null;
+  coordinador: Coordinador;
+  ponente: Ponente;
+  moderadorNecesario: boolean;
+  moderador?: ModeradorSolicitud | null;
+  participantes?: Participante[]; // Lista de participantes
+  imagen?: string | null;
+  horaInicio?: string | null;
+  horaFin?: string | null;
+  estadoEvento?: 'Próximo' | 'En Vivo' | 'Culminado'; // Calculado en el backend
 
-  // Campos calculados en el backend, no se envían al backend pero pueden recibirse
-  estado_evento?: 'Próximo' | 'En Vivo' | 'Culminado';
+  constructor(data: Partial<Evento> = {}) {
+    this.id = data.id;
+    this.nombreEvento = data.nombreEvento || '';
+    this.descripcion = data.descripcion || '';
+    this.fechaEvento = data.fechaEvento ? new Date(data.fechaEvento) : new Date();
+    this.categoriaEvento = data.categoriaEvento
+      ? new CategoriaEvento()
+      : null;
+    this.tipoEvento = data.tipoEvento || 'Virtual';
+    this.ubicacion = data.ubicacion || null;
+    this.coordinador = new Coordinador(data.coordinador || {});
+    this.ponente = new Ponente(data.ponente || {});
+    this.moderadorNecesario = data.moderadorNecesario || false;
+    this.moderador = data.moderador ? new ModeradorSolicitud(data.moderador) : null;
+    this.participantes = (data.participantes || []).map((p) => new Participante(p));
+    this.imagen = data.imagen || null;
+    this.horaInicio = data.horaInicio || null;
+    this.horaFin = data.horaFin || null;
+    this.estadoEvento = data.estadoEvento || 'Próximo';
+  }
+
+  // Método para verificar si el evento es presencial
+  esPresencial(): boolean {
+    return this.tipoEvento === 'Presencial';
+  }
+
+  // Validaciones en el cliente
+  validar(): string[] {
+    const errores: string[] = [];
+
+    if (!this.nombreEvento) {
+      errores.push('El nombre del evento es obligatorio.');
+    }
+
+    if (!this.descripcion) {
+      errores.push('La descripción es obligatoria.');
+    }
+
+    if (!this.fechaEvento) {
+      errores.push('La fecha del evento es obligatoria.');
+    }
+
+    if (this.esPresencial() && !this.ubicacion) {
+      errores.push('La ubicación es obligatoria para eventos presenciales.');
+    }
+
+    if (this.moderadorNecesario && !this.moderador) {
+      errores.push('Debe asignar un moderador si es necesario.');
+    }
+
+    return errores;
+  }
 }

@@ -30,4 +30,9 @@ export class LoginComponent {
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
+
+  // Método para navegar a la página de registro
+  navigateToRegister() {
+    this.router.navigate(['/register']);
+  }
 }

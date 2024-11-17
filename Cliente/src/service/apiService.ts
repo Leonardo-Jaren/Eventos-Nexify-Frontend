@@ -23,6 +23,12 @@ export class ApiService {
         };
     }
 
+    // ! Método para registrar un usuario
+    public registerUser(usuario: Usuario): Observable<Usuario> {
+        const body = JSON.stringify(usuario);
+        return this.http.post<Usuario>(`${this.ApiUrl}register/`, body, this.getHttpOptions());
+    }
+
     // ! Método para obtener los usuarios
     public getUsers(): Observable<Usuario[]> {
         return this.http.get<Usuario[]>(`${this.ApiUrl}usuario/`, this.getHttpOptions());
@@ -51,8 +57,22 @@ export class ApiService {
     }
 
     // ! Método para insertar un evento
-    insertEvento(evento: Evento): Observable<Evento> {
-        const body = JSON.stringify(evento);
-        return this.http.post<Evento>(`${this.ApiUrl}eventos/`, body, this.getHttpOptions());
+    insertEvento(formData: FormData): Observable<any> {
+        return this.http.post(`${this.ApiUrl}eventos/`, formData); // Sin encabezados manuales
+      }
+
+    // ! Coordinadores
+    getCoordinadores(): Observable<Usuario[]> {
+        return this.http.get<Usuario[]>(`${this.ApiUrl}coordinadores/`);
     }
+
+  // ! Ponentes
+  getPonentes(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.ApiUrl}ponentes/`);
+  }
+
+  // ! Moderadores
+  getModeradores(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.ApiUrl}moderadores/`);
+  }
 }
