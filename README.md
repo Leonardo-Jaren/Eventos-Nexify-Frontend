@@ -1,1 +1,0 @@
-# Eventos-Nexify-Frontend
