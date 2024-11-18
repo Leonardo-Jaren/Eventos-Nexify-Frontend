@@ -10,7 +10,7 @@ export class Interceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let request = req;
         const token = this.authService.getToken();
-        const apiKey = '1cf535c7f0f585ab0e4a29419d62c048296a4cd1';
+        const apiKey = 'fe1147108cf466dc2085a0cf14757bc1a4974a11';
 
         if (token) {
             request = req.clone({
