@@ -66,19 +66,15 @@
         INICIAR SESIÓN
       </button>
 
-      <!-- Opciones adicionales -->
-      <!-- <div class="flex flex-col sm:flex-row sm:justify-between items-center mt-4 text-sm text-gray-600">
-        <label class="flex items-center mb-2 sm:mb-0">
-          <input type="checkbox" class="mr-1" />
-          Recordar contraseña
-        </label>
-        <a href="#" class="hover:underline">Olvidaste tu contraseña?</a>
-      </div> -->
-
-      <!-- Enlace de Registro -->
-      <!-- <p class="mt-4 text-center text-sm text-gray-600">
-        No tienes una cuenta? <a href="#" class="text-blue-500 hover:underline">Regístrate aquí</a>
-      </p> -->
+      <!-- Opción para registrarse -->
+      <p class="text-center text-gray-700 mt-4">
+        ¿No tienes una cuenta?
+        <a
+          (click)="navigateToRegister()"
+          class="text-blue-500 hover:underline cursor-pointer">
+          Regístrate aquí
+        </a>
+      </p>
     </div>
   </div>
 </div>

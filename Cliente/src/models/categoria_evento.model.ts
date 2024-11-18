@@ -1,3 +1,4 @@
 export class CategoriaEvento {
-    nombre: string;
+    id : number;
+    nombre_categoria: string;
 }

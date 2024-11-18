@@ -1,23 +1,12 @@
 export class Usuario {
-    roleChoices: { [key: string]: string } = {
-        Coordinador: 'Coordinador',
-        Participante: 'Participante',
-        Ponente: 'Ponente',
-        Moderador_Solicitud: 'Moderador_Solicitud',
-    };
-    id: number;
+    id?: number; // ID opcional, se generará en el backend
     username: string;
-    telefono: string;
-    url_linkedin: string;
-    rol: string;
-    rango: number;
-    eventos_asistidos: number;
-
-    constructor(rol: string) {
-        this.rol = this.roleChoices[rol] || 'Participante';
+    email: string;
+    password: string;
+    telefono?: string; // Opcional
+    rol: 'Coordinador' | 'Participante' | 'Ponente' | 'Moderador_Solicitud';
+  
+    constructor(init?: Partial<Usuario>) {
+      Object.assign(this, init);
     }
-}
-
-// Ejemplo de creación
-const ponente = new Usuario('Ponente');
-const coordinador = new Usuario('Coordinador');
+  }

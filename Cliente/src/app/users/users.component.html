@@ -25,20 +25,6 @@
           
           <!-- Teléfono -->
           <td class="border border-gray-300 p-2 text-center">{{ usuario.telefono || 'No disponible' }}</td>
-          
-          <!-- LinkedIn -->
-          <td class="border border-gray-300 p-2 text-center">
-            <a *ngIf="usuario.url_linkedin" [href]="usuario.url_linkedin" target="_blank" class="text-blue-500 hover:underline">
-              Ver LinkedIn
-            </a>
-            <span *ngIf="!usuario.url_linkedin" class="text-gray-500">No disponible</span>
-          </td>
-          
-          <!-- Rango -->
-          <td class="border border-gray-300 p-2 text-center">{{ usuario.rango }}</td>
-          
-          <!-- Eventos Asistidos -->
-          <td class="border border-gray-300 p-2 text-center">{{ usuario.eventos_asistidos }}</td>
         </tr>
       </tbody>
     </table>
