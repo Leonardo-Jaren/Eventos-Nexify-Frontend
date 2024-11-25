@@ -1,0 +1,101 @@
+<div class="min-h-screen bg-gray-50 flex flex-col items-center">
+  <!-- Barra de navegación -->
+  <header class="w-full bg-gray-900 text-white py-4 px-6 flex justify-between items-center">
+    <!-- logo -->
+    <div class="text-2xl font-bold">LOGO</div>
+
+    <!-- navegación -->
+    <nav class="flex space-x-6">
+      <!-- botón home -->
+      <button
+        (click)="navHome()"
+        class="text-white text-lg hover:bg-blue-700 flex items-center space-x-2 px-5 py-2 rounded-md bg-blue-600"
+      >
+        <span>Home</span>
+      </button>
+
+      <!-- botón cerrar sesión -->
+      <button
+        (click)="logout()"
+        class="text-white text-lg px-5 py-2 rounded-md bg-gray-700 hover:bg-gray-800"
+      >
+        Cerrar Sesión
+      </button>
+    </nav>
+  </header>
+
+  <!-- Contenido principal -->
+  <div class="flex flex-col justify-center items-center flex-grow">
+    <div class="w-11/12 max-w-6xl bg-white rounded-lg shadow-lg p-10 flex space-x-12">
+      <!-- Sección de edición -->
+      <div class="flex-1">
+        <h2 class="text-2xl font-semibold flex items-center space-x-4 mb-8">
+          <img src="https://img.icons8.com/color/48/null/user.png" alt="icono usuario" class="h-12 w-12" />
+          <span>Editar Perfil</span>
+        </h2>
+
+        <div class="space-y-8">
+          <!-- Campo teléfono -->
+          <div class="flex items-center space-x-6">
+            <img src="https://img.icons8.com/color/48/null/phone.png" alt="icono teléfono" class="h-10 w-10" />
+            <input
+              type="text"
+              value="+51 000 000 000"
+              class="flex-grow p-4 border rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+            <button class="px-8 py-3 bg-blue-600 text-white text-lg rounded hover:bg-blue-700">Guardar</button>
+          </div>
+
+          <!-- Campo Gmail -->
+          <div class="flex items-center space-x-6">
+            <img src="https://img.icons8.com/color/48/null/gmail.png" alt="icono gmail" class="h-10 w-10" />
+            <input
+              type="email"
+              value="ponente@udh.edu.pe"
+              class="flex-grow p-4 border rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+            <button class="px-8 py-3 bg-blue-600 text-white text-lg rounded hover:bg-blue-700">Guardar</button>
+          </div>
+
+          <!-- Campo LinkedIn -->
+          <div class="flex items-center space-x-6">
+            <img src="https://img.icons8.com/color/48/null/linkedin.png" alt="icono linkedin" class="h-10 w-10" />
+            <input
+              type="url"
+              value="https://www.linkedin.com/in/tu_nombre"
+              class="flex-grow p-4 border rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+            <button class="px-8 py-3 bg-blue-600 text-white text-lg rounded hover:bg-blue-700">Guardar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de imagen -->
+      <div class="flex-1 flex flex-col items-center justify-center border-l-2 border-gray-200 pl-12">
+        <h3 class="text-2xl font-semibold mb-8">Foto de perfil</h3>
+        <div class="relative">
+          <img
+            src="https://via.placeholder.com/150"
+            alt="foto de perfil"
+            class="h-48 w-48 rounded-full border border-gray-300 object-cover"
+          />
+          <label
+            for="upload"
+            class="absolute bottom-2 right-2 bg-gray-700 text-white p-3 rounded-full cursor-pointer hover:bg-gray-800"
+          >
+            <input id="upload" type="file" class="hidden" />
+            <img src="https://img.icons8.com/ios-filled/24/null/edit.png" alt="editar" />
+          </label>
+        </div>
+        <div class="mt-8 flex space-x-6">
+          <button class="px-8 py-3 bg-green-600 text-white text-lg rounded hover:bg-green-700">Guardar</button>
+          <button
+            class="px-8 py-3 bg-gray-600 text-white text-lg rounded hover:bg-gray-700 flex items-center space-x-2"
+          >
+            <span>Modificar imagen</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

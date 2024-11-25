@@ -23,7 +23,8 @@ import { NavigationComponent } from './navigation/navigation.component'; // Mód
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { ModalModEventComponent } from './modal-mod-event/modal-mod-event.component';
 import { CreateEventComponent } from './create-event/create-event.component';
-import { RegisterComponent } from './register/register.component'; // Importa FullCalendar
+import { RegisterComponent } from './register/register.component';
+import { PerfilComponent } from './perfil/perfil.component'; // Importa FullCalendar
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { RegisterComponent } from './register/register.component'; // Importa Fu
     ModalModEventComponent,
     CreateEventComponent,
     RegisterComponent,
+    PerfilComponent,
   ],
   imports: [
     BrowserModule,

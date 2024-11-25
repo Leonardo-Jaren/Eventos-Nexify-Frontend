@@ -22,7 +22,7 @@ export class NavigationComponent implements OnInit {
     });
   }
 
-  
+
   ngOnInit(): void {
     this.role = this.authService.getUserRole();
   }
@@ -49,5 +49,9 @@ export class NavigationComponent implements OnInit {
 
   navListaEventos(): void {
     this.router.navigate(['/eventos']); // Redirige a la ruta "/eventos"
+  }
+
+  navPerfil() {
+    this.router.navigate(['/perfil']);
   }
 }
