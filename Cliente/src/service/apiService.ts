@@ -66,13 +66,18 @@ export class ApiService {
         return this.http.get<Usuario[]>(`${this.ApiUrl}coordinadores/`);
     }
 
-  // ! Ponentes
-  getPonentes(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.ApiUrl}ponentes/`);
-  }
+    // ! Ponentes
+    getPonentes(): Observable<Usuario[]> {
+        return this.http.get<Usuario[]>(`${this.ApiUrl}ponentes/`);
+    }
 
-  // ! Moderadores
-  getModeradores(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(`${this.ApiUrl}moderadores/`);
-  }
+    // ! Moderadores
+    getModeradores(): Observable<Usuario[]> {
+        return this.http.get<Usuario[]>(`${this.ApiUrl}moderadores/`);
+    }
+
+    // ! Eventos recientes
+    public getEventosRecientes(): Observable<Evento[]> {
+        return this.http.get<Evento[]>(`${this.ApiUrl}eventos/?ordering=-fecha_evento`, this.getHttpOptions());
+    }
 }

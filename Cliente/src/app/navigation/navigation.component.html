@@ -10,12 +10,12 @@
       </div>
     </div>
 
-    <!-- Botones y perfil en pantallas grandes con íconos y nuevo diseño -->
+    <!-- Botones para pantallas grandes -->
     <div class="hidden lg:flex items-center space-x-4">
-      <button (click)="navHome()" class="flex items-center bg-gray-800 bg-opacity-60 border border-transparent text-white px-4 py-2 rounded-lg hover:bg-gray-700">
+      <button *ngIf="showBackToHome" (click)="navHome()" class="flex items-center bg-gray-800 bg-opacity-60 border border-transparent text-white px-4 py-2 rounded-lg hover:bg-gray-700">
         <i class="fas fa-home mr-2"></i> Volver al inicio
       </button>
-      <button class="flex items-center bg-gray-800 bg-opacity-60 border border-transparent text-white px-4 py-2 rounded-lg hover:bg-gray-700">
+      <button (click)="navGestionarPonente()" class="flex items-center bg-gray-800 bg-opacity-60 border border-transparent text-white px-4 py-2 rounded-lg hover:bg-gray-700">
         <i class="fas fa-user-tie mr-2"></i> Gestionar Ponente
       </button>
       <button (click)="navCrearEvento()" class="flex items-center bg-gray-800 bg-opacity-60 border border-transparent text-white px-4 py-2 rounded-lg hover:bg-gray-700">
@@ -24,25 +24,28 @@
       <button (click)="navListaEventos()" class="flex items-center bg-gray-800 bg-opacity-60 border border-transparent text-white px-4 py-2 rounded-lg hover:bg-gray-700">
         <i class="fas fa-calendar-check mr-2"></i> Lista de eventos
       </button>
-      <div class="inline-flex items-center text-white cursor-pointer hover:text-gray-300">
+      <div (click)="navPerfil()" class="inline-flex items-center text-white cursor-pointer hover:text-gray-300">
         <span class="mr-2">Perfil</span>
         <i class="fas fa-user-circle text-2xl"></i>
       </div>
+      <button (click)="logout()" class="flex items-center bg-red-600 border border-transparent text-white px-4 py-2 rounded-lg hover:bg-red-700">
+        <i class="fas fa-sign-out-alt mr-2"></i> Cerrar sesión
+      </button>
     </div>
 
-    <!-- Botón desplegable en pantallas pequeñas -->
+    <!-- Menú desplegable para pantallas pequeñas -->
     <div class="lg:hidden relative">
       <button title="bt-menu" (click)="toggleDropdown()" class="text-white focus:outline-none">
         <i class="fas fa-bars text-2xl"></i>
       </button>
-      <!-- Menú desplegable -->
       <div *ngIf="isDropdownOpen" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-20">
-        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Volver al inicio</a>
-        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Gestionar Ponente</a>
-        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Crear evento</a>
-        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Lista eventos</a>
-        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Perfil</a>
+        <a *ngIf="showBackToHome" (click)="navHome()" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Volver al inicio</a>
+        <a (click)="navGestionarPonente()" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Gestionar Ponente</a>
+        <a (click)="navCrearEvento()" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Crear evento</a>
+        <a (click)="navListaEventos()" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Lista eventos</a>
+        <a (click)="logout()" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Cerrar sesión</a>
+        <a (click)="navPerfil()" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Perfil</a>
       </div>
     </div>
+    </div>
   </div>
-</div>

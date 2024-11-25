@@ -1,6 +1,6 @@
 <app-navigation></app-navigation>
 <!-- Contenedor principal -->
-<div class="bg-gray-100 min-h-screen p-4 space-y-6 pt-24">  
+<div class="bg-gray-100 min-h-screen space-y-6 pt-20">  
   <!-- Contenedor principal con imagen de fondo -->
   <div class="relative bg-cover bg-center h-80 flex items-center" style="background-image: url('assets/fondo_ponencia.jpg');">
     <!-- Filtro oscuro para mejorar la legibilidad -->
@@ -41,29 +41,37 @@
   </div>
 
   <!-- Sección de contenido reciente -->
-  <div>
+  <div class="p-4">
     <h3 class="text-lg font-bold mb-4">Eventos recientes</h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <div class="bg-white rounded-lg shadow-lg p-4">
-        <img src="assets/event1.jpg" alt="Evento 1" class="rounded mb-2 w-full">
-        <p class="font-semibold">Evento de IA</p>
-        <p class="text-sm text-gray-500">20k vistas</p>
-      </div>
-      <div class="bg-white rounded-lg shadow-lg p-4">
-        <img src="assets/event2.jpg" alt="Evento 2" class="rounded mb-2 w-full">
-        <p class="font-semibold">Charla de Big Data</p>
-        <p class="text-sm text-gray-500">15k vistas</p>
-      </div>
-      <div class="bg-white rounded-lg shadow-lg p-4">
-        <img src="assets/event3.jpg" alt="Evento 3" class="rounded mb-2 w-full">
-        <p class="font-semibold">Redes Sociales</p>
-        <p class="text-sm text-gray-500">30k vistas</p>
-      </div>
-      <div class="bg-white rounded-lg shadow-lg p-4">
-        <img src="assets/event4.jpg" alt="Evento 4" class="rounded mb-2 w-full">
-        <p class="font-semibold">Taller de UX</p>
-        <p class="text-sm text-gray-500">25k vistas</p>
+  
+    <!-- Mostrar un mensaje si no hay eventos -->
+    <div *ngIf="eventosRecientes.length === 0" class="text-center text-gray-500">
+      No hay eventos recientes disponibles.
+    </div>
+  
+    <!-- Lista de eventos -->
+    <div *ngIf="eventosRecientes.length > 0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div *ngFor="let evento of eventosRecientes" class="bg-white rounded-lg shadow-lg p-4">
+        <!-- Imagen del evento -->
+        <img 
+          [src]="evento.imagen || 'assets/default-event.jpg'" 
+          alt="{{ evento.nombreEvento }}" 
+          class="rounded mb-2 w-full h-40 object-cover"
+        >
+        
+        <!-- Nombre del evento -->
+        <p class="font-semibold text-lg">{{ evento.nombreEvento }}</p>
+  
+        <!-- Fecha del evento -->
+        <p class="text-sm text-gray-500">
+          Fecha: {{ evento.fechaEvento | date: 'longDate' }}
+        </p>
+  
+        <!-- Tipo de evento -->
+        <p class="text-sm text-gray-500">
+          Tipo: {{ evento.tipoEvento }}
+        </p>
       </div>
     </div>
-  </div>
+  </div>  
 </div>
