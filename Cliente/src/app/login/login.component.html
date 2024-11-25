@@ -1,55 +1,86 @@
-<div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-200 to-indigo-300">
-  <div class="w-full max-w-xs p-8 space-y-4 bg-white rounded-lg shadow-lg">
-    <div class="flex justify-center mb-4">
-      <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center">
-        <i class="pi pi-user text-white text-3xl"></i>
+<div class="flex items-center justify-center min-h-screen bg-gradient-to-br from-teal-600 from-50% to-sky-950 to-50%">
+  <!-- Reducir el tamaño del contenedor cambiando max-w-7xl a max-w-lg -->
+  <div class="w-full max-w-3xl p-4 bg-white rounded-lg shadow-lg flex overflow-hidden">
+
+    <!-- Sección de la imagen -->
+    <div class="hidden md:block md:w-1/2">
+      <img src="assets/fondo_login.jpg" alt="Background image" class="w-full h-full object-cover rounded-l-lg">
+    </div>
+
+    <!-- Sección del formulario -->
+    <div class="w-full md:w-1/2 p-6 space-y-4">
+      <div class="flex justify-center mb-4">
+        <!-- Ícono sin el círculo -->
+        <i class="pi pi-user text-blue-500 text-4xl"></i>
       </div>
-    </div>
-    <h2 class="text-2xl font-semibold text-center text-gray-700">Iniciar sesión</h2>
-    
-    <div>
-      <label class="block text-gray-700">Nombre</label>
-      <div class="flex items-center bg-gray-100 rounded-lg">
-        <i class="pi pi-user ml-3 text-gray-400"></i>
-        <input
-          type="text"
-          [(ngModel)]="usuario"
-          class="w-full p-2 text-gray-700 bg-gray-100 rounded-r-lg focus:outline-none"
-          placeholder="Username"
-        />
+      <h2 class="text-2xl font-semibold text-center text-gray-700">Iniciar sesión</h2>
+
+      <!-- Mensaje de error -->
+      <div *ngIf="errorMessage" class="text-red-500 text-center">
+        {{ errorMessage }}
       </div>
-    </div>
 
-    <div>
-      <label class="block text-gray-700">Contraseña</label>
-      <div class="flex items-center bg-gray-100 rounded-lg">
-        <i class="pi pi-lock ml-3 text-gray-400"></i>
-        <input
-          type="password"
-          [(ngModel)]="clave"
-          class="w-full p-2 text-gray-700 bg-gray-100 rounded-r-lg focus:outline-none"
-          placeholder="Password"
-        />
+      <!-- Botón de Google -->
+      <button class="flex items-center justify-center w-full py-2 mb-4 bg-white border border-gray-300 rounded-lg shadow-md hover:bg-gray-50">
+        <img title="img" src="assets/logo_google.png" class="h-5 mr-4">
+        Continuar con Google
+      </button>
+
+      <!-- Línea divisoria -->
+      <div class="flex items-center my-4">
+        <hr class="flex-1 border-gray-300">
+        <span class="px-4 text-gray-500 text-sm">o</span>
+        <hr class="flex-1 border-gray-300">
       </div>
+
+      <!-- Campo de Correo Electrónico -->
+      <div>
+        <label class="block text-gray-700">Correo electrónico</label>
+        <div class="flex items-center border-b border-gray-300 focus-within:border-blue-500">
+          <i class="pi pi-user ml-3 text-gray-400"></i>
+          <input
+            type="text"
+            [(ngModel)]="usuario"
+            class="w-full p-2 text-gray-700 bg-transparent focus:outline-none"
+            placeholder="example@udh.edu.pe"
+          />
+        </div>
+      </div>
+
+      <!-- Campo de Contraseña con Mostrar/Ocultar -->
+      <div>
+        <label class="block text-gray-700">Contraseña</label>
+        <div class="flex items-center border-b border-gray-300 focus-within:border-blue-500">
+          <i class="pi pi-lock ml-3 text-gray-400"></i>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="clave"
+            class="w-full p-2 text-gray-700 bg-transparent focus:outline-none"
+            placeholder="••••••••"
+          />
+          <button title="pass" type="button" (click)="togglePasswordVisibility()" class="ml-2 text-gray-500 focus:outline-none">
+            <i [ngClass]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Botón de Inicio de Sesión -->
+      <button
+        (click)="ingresar()"
+        class="w-full py-2 mt-4 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none"
+      >
+        INICIAR SESIÓN
+      </button>
+
+      <!-- Opción para registrarse -->
+      <p class="text-center text-gray-700 mt-4">
+        ¿No tienes una cuenta? 
+        <a 
+          (click)="navigateToRegister()"
+          class="text-blue-500 hover:underline cursor-pointer">
+          Regístrate aquí
+        </a>
+      </p>
     </div>
-
-    <button 
-      (click)="ingresar()"
-      class="w-full py-2 mt-4 text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none"
-    >
-      Acceder
-    </button>
-
-    <div class="flex flex-col sm:flex-row sm:justify-between items-center mt-4 text-sm text-gray-600">
-      <label class="flex items-center mb-2 sm:mb-0">
-        <input type="checkbox" class="mr-1" />
-        Recordar contraseña
-      </label>
-      <a href="#" class="hover:underline">Olvidaste tu contraseña?</a>
-    </div>
-
-    <p class="mt-4 text-center text-sm text-gray-600">
-      No tienes una cuenta? <a href="#" class="text-blue-500 hover:underline">Regístrate aquí</a>
-    </p>
   </div>
 </div>

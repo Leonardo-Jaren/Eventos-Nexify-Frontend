@@ -16,7 +16,7 @@ export class Interceptor implements HttpInterceptor {
             request = req.clone({
                 setHeaders: {
                     Authorization: `Token ${token}`,
-                    'X-API-KEY': apiKey
+                    'API-KEY': apiKey
                 }
             });
         }

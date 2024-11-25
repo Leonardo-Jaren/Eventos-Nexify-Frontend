@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NexAppComponent } from './nex-app.component';
+import { ModalModEventComponent } from './modal-mod-event.component';
 
-describe('NexAppComponent', () => {
-  let component: NexAppComponent;
-  let fixture: ComponentFixture<NexAppComponent>;
+describe('ModalModEventComponent', () => {
+  let component: ModalModEventComponent;
+  let fixture: ComponentFixture<ModalModEventComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NexAppComponent]
+      declarations: [ModalModEventComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NexAppComponent);
+    fixture = TestBed.createComponent(ModalModEventComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

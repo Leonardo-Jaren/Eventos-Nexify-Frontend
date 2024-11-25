@@ -1,0 +1,12 @@
+input, select {
+    margin-top: 4px;
+  }
+  
+  button {
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #2563eb;
+  }
+  

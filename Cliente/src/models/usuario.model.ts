@@ -1,14 +1,12 @@
-
 export class Usuario {
-    roleChoices: { [key: string]: string } = {
-        Coordinador: 'Coordinador',
-        Participante: 'Participante',
-        Ponente: 'Ponente',
-        Moderador_Solicitud: 'Moderador_Solicitud',
-    };
-    telefono: string;
-    urlLinkedin: string;
-    rol: string;
-    rango: number = 1;
-    eventosAsistidos: number = 0;
-}
+    id?: number; // ID opcional, se generará en el backend
+    username: string;
+    email: string;
+    password: string;
+    telefono?: string; // Opcional
+    rol: 'Coordinador' | 'Participante' | 'Ponente' | 'Moderador_Solicitud';
+  
+    constructor(init?: Partial<Usuario>) {
+      Object.assign(this, init);
+    }
+  }

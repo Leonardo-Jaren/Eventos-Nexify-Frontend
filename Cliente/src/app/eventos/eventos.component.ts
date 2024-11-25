@@ -1,26 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../service/apiService';
 import { Evento } from '../../models/evento.model';
-import { AuthService } from '../../service/auth';
 
 @Component({
   selector: 'app-eventos',
   templateUrl: './eventos.component.html',
-  styleUrl: './eventos.component.css'
+  styleUrls: ['./eventos.component.css']
 })
-export class EventosComponent {
-  eventos: Evento[];
-  constructor(private authService: AuthService, private cliente: ApiService) {}
+export class EventosComponent implements OnInit {
+  eventos: Evento[] = []; // Lista de eventos cargados
+  errorMessage: string = ''; // Mensaje de error si ocurre
+
+  constructor(private cliente: ApiService) {}
 
   ngOnInit(): void {
-    this.cliente.getEventos().subscribe(eventos => {
-      this.eventos = eventos;
+    // Cargar la lista de eventos al inicializar el componente
+    this.cliente.getEventos().subscribe({
+      next: (eventos) => {
+        this.eventos = eventos; // Guardar eventos obtenidos
+      },
+      error: (error) => {
+        this.errorMessage = 'Error al cargar eventos'; // Mensaje de error
+        console.error(error);
+      }
     });
   }
-
-  logout() {
-    this.authService.logout();
-  }
-  
 }
-

@@ -1,15 +1,14 @@
 import { Usuario } from './usuario.model';
 
 export class ModeradorSolicitud extends Usuario {
-    username: string;
-    moderadorNecesario: boolean;
+  moderador_necesario: boolean;
 
-    constructor(moderadorNecesario: boolean) {
-        super();
-        this.moderadorNecesario = moderadorNecesario;
-    }
+  constructor(init?: Partial<ModeradorSolicitud>) {
+    super(init);
+    this.moderador_necesario = init?.moderador_necesario || false;
+  }
 
-    override toString(): string {
-        return `Moderador Solicitud: ${this.username}`;
-    }
+  override toString(): string {
+    return `Moderador Solicitud: ${this.username}`;
+  }
 }

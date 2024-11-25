@@ -1,51 +1,46 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private token = new BehaviorSubject<string | null>(null);
-  private ApiUrl = "http://127.0.0.1:8000/api/"; // URL to web api
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
+  private token: string | null = null;
+  private tokenKey = 'token';
+  private ApiUrl = "http://127.0.0.1:8000/api/"; // URL de la API
 
-  login(username: string, password: string) {
-    const headers = { 'API-KEY': 'fe1147108cf466dc2085a0cf14757bc1a4974a11' };
-    this.http.post<{token: string}>(this.ApiUrl + 'login/', {username, password}, {headers})
-      .subscribe(response => {
-        this.token.next(response.token);
-        localStorage.setItem('token', response.token);
-        const returnUrl = this.route.snapshot.queryParamMap.get('returnUrl') || '/';
-        this.router.navigateByUrl(returnUrl);
-      }, error => {
-        console.error('Error login', error);
-      });
-  }
+  constructor(private http: HttpClient, private router: Router) {}
 
-  logout(){
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
-    window.location.reload();
+  login(username: string, password: string): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${this.ApiUrl}login/`, { username, password })
+      .pipe(
+        tap(response => {
+          this.token = response.token;
+          localStorage.setItem('token', response.token);
+        })
+      );
   }
 
   getToken() {
-    return this.token.value;
+    return this.token || localStorage.getItem('token');
   }
 
   isLoggedIn(): boolean {
-    if (typeof localStorage !== 'undefined') {
-      // Usa localStorage aquí
-      return !!localStorage.getItem('token');
-    }
-    return false;
+    return !!this.getToken();
   }
-  
-  loadToken() {
-    const token = localStorage.getItem('token');
-    if (token) {
-      this.token.next(token);
-    }
+
+  logout() {
+    // Elimina el token del almacenamiento local
+    localStorage.removeItem(this.tokenKey);
+
+    // Redirige al usuario a la página de inicio de sesión
+    this.router.navigate(['/login']);
+  }
+
+  getUserRole(): string {
+    return 'user';
   }
 }
