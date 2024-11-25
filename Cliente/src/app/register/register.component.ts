@@ -16,31 +16,29 @@ export class RegisterComponent {
   constructor(private apiService: ApiService, private router: Router) {}
 
   onRegister(): void {
-    if (!this.usuario.username || !this.usuario.password || !this.usuario.email || !this.usuario.rol) {
-      this.errorMessage = "Todos los campos son obligatorios.";
+    this.usuario.rol = 'Participante'; // Asignar rol por defecto
+  
+    if (!this.usuario.username || !this.usuario.password || !this.usuario.email) {
+      this.errorMessage = 'Todos los campos son obligatorios.';
       return;
     }
-
+  
     this.apiService.registerUser(this.usuario).subscribe(
-      response => {
-        this.successMessage = "Usuario registrado con éxito.";
+      (response) => {
+        this.successMessage = 'Usuario registrado con éxito.';
         this.errorMessage = '';
-        
-        // Redirigir a la ruta home después del registro exitoso
+  
+        // Redirigir a /home después de registrarse
+        localStorage.setItem('role', 'Participante');
         setTimeout(() => {
           this.router.navigate(['/home']);
-        }, 1000); // Opcional: 1 segundo de espera para mostrar el mensaje
+        }, 1000);
       },
-      error => {
-        if (error.error && typeof error.error === 'object') {
-          this.errorMessage = Object.values(error.error).join(', ');
-        } else if (typeof error.error === 'string') {
-          this.errorMessage = error.error;
-        } else {
-          this.errorMessage = "Ha ocurrido un error inesperado.";
-        }
+      (error) => {
+        this.errorMessage = error.error?.error || 'Ha ocurrido un error inesperado.';
         this.successMessage = '';
       }
     );
   }
+  
 }
