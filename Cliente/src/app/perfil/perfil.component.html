@@ -1,101 +1,105 @@
-<div class="min-h-screen bg-gray-50 flex flex-col items-center">
-  <!-- Barra de navegación -->
-  <header class="w-full bg-gray-900 text-white py-4 px-6 flex justify-between items-center">
-    <!-- logo -->
-    <div class="text-2xl font-bold">LOGO</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Navigation -->
+        <nav class="mb-8 bg-white shadow-md rounded-lg overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16 items-center">
+                    <div class="flex items-center">
+                        <img src="assets/logo_nexify.png" alt="Logo" class="h-10 w-auto mr-4">
+                        <h1 class="text-xl font-bold text-gray-800">Nexify</h1>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button (click)="navHome()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300 flex items-center">
+                            <i class="fas fa-home mr-2"></i>Home
+                        </button>
+                        <button (click)="logout()" class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition duration-300 flex items-center">
+                            <i class="fas fa-sign-out-alt mr-2"></i>Cerrar Sesión
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
 
-    <!-- navegación -->
-    <nav class="flex space-x-6">
-      <!-- botón home -->
-      <button
-        (click)="navHome()"
-        class="text-white text-lg hover:bg-blue-700 flex items-center space-x-2 px-5 py-2 rounded-md bg-blue-600"
-      >
-        <span>Home</span>
-      </button>
+        <!-- Profile Container -->
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl overflow-hidden md:flex">
+            <!-- Profile Image Section -->
+            <div class="md:w-1/3 bg-gray-100 p-8 flex flex-col items-center justify-center">
+                <div class="relative mb-6">
+                    <img src="https://via.placeholder.com/200" alt="Profile" class="w-48 h-48 rounded-full object-cover border-4 border-blue-500 shadow-lg">
+                    <label class="absolute bottom-0 right-0 bg-blue-600 text-white p-3 rounded-full cursor-pointer hover:bg-blue-700 transition duration-300">
+                        <input type="file" class="hidden">
+                        <i class="fas fa-camera"></i>
+                    </label>
+                </div>
+                <button class="w-full py-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition duration-300 mb-4">
+                    Guardar Cambios
+                </button>
+            </div>
 
-      <!-- botón cerrar sesión -->
-      <button
-        (click)="logout()"
-        class="text-white text-lg px-5 py-2 rounded-md bg-gray-700 hover:bg-gray-800"
-      >
-        Cerrar Sesión
-      </button>
-    </nav>
-  </header>
+            <!-- Profile Details Section -->
+            <div class="md:w-2/3 p-8 flex flex-col items-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Editar Perfil</h2>
 
-  <!-- Contenido principal -->
-  <div class="flex flex-col justify-center items-center flex-grow">
-    <div class="w-11/12 max-w-6xl bg-white rounded-lg shadow-lg p-10 flex space-x-12">
-      <!-- Sección de edición -->
-      <div class="flex-1">
-        <h2 class="text-2xl font-semibold flex items-center space-x-4 mb-8">
-          <img src="https://img.icons8.com/color/48/null/user.png" alt="icono usuario" class="h-12 w-12" />
-          <span>Editar Perfil</span>
-        </h2>
+                <!-- Profile Fields -->
+                <div class="space-y-6 w-full">
+                    <!-- Usuario -->
+                    <div class="flex items-center space-x-4">
+                        <i class="fas fa-user text-blue-600 text-2xl w-10"></i>
+                        <div class="flex-1">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Usuario</label>
+                            <div>{{usuarioAct.username}}</div>
+                        </div>
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                            Actualizar
+                        </button>
+                    </div>
 
-        <div class="space-y-8">
-          <!-- Campo teléfono -->
-          <div class="flex items-center space-x-6">
-            <img src="https://img.icons8.com/color/48/null/phone.png" alt="icono teléfono" class="h-10 w-10" />
-            <input
-              type="text"
-              value="+51 000 000 000"
-              class="flex-grow p-4 border rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            <button class="px-8 py-3 bg-blue-600 text-white text-lg rounded hover:bg-blue-700">Guardar</button>
-          </div>
+                    <!-- Teléfono -->
+                    <div class="flex items-center space-x-4">
+                        <i class="fas fa-phone text-blue-600 text-2xl w-10"></i>
+                        <div class="flex-1">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Teléfono</label>
+                            <div>{{usuarioAct.telefono}}</div>
+                        </div>
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                            Actualizar
+                        </button>
+                    </div>
 
-          <!-- Campo Gmail -->
-          <div class="flex items-center space-x-6">
-            <img src="https://img.icons8.com/color/48/null/gmail.png" alt="icono gmail" class="h-10 w-10" />
-            <input
-              type="email"
-              value="ponente@udh.edu.pe"
-              class="flex-grow p-4 border rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            <button class="px-8 py-3 bg-blue-600 text-white text-lg rounded hover:bg-blue-700">Guardar</button>
-          </div>
+                    <!-- Correo Electrónico -->
+                    <div class="flex items-center space-x-4">
+                        <i class="fas fa-envelope text-red-600 text-2xl w-10"></i>
+                        <div class="flex-1">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                            <div>{{usuarioAct.email}}</div>
+                        </div>
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                            Actualizar
+                        </button>
+                    </div>
 
-          <!-- Campo LinkedIn -->
-          <div class="flex items-center space-x-6">
-            <img src="https://img.icons8.com/color/48/null/linkedin.png" alt="icono linkedin" class="h-10 w-10" />
-            <input
-              type="url"
-              value="https://www.linkedin.com/in/tu_nombre"
-              class="flex-grow p-4 border rounded-md text-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            <button class="px-8 py-3 bg-blue-600 text-white text-lg rounded hover:bg-blue-700">Guardar</button>
-          </div>
+                    <!-- Rol -->
+                    <div class="flex items-center space-x-4">
+                        <i class="fas fa-user-tag text-purple-600 text-2xl w-10"></i>
+                        <div class="flex-1">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Rol</label>
+                            <div>{{usuarioAct.rol}}</div>
+                        </div>
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                            Actualizar
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <!-- Sección de imagen -->
-      <div class="flex-1 flex flex-col items-center justify-center border-l-2 border-gray-200 pl-12">
-        <h3 class="text-2xl font-semibold mb-8">Foto de perfil</h3>
-        <div class="relative">
-          <img
-            src="https://via.placeholder.com/150"
-            alt="foto de perfil"
-            class="h-48 w-48 rounded-full border border-gray-300 object-cover"
-          />
-          <label
-            for="upload"
-            class="absolute bottom-2 right-2 bg-gray-700 text-white p-3 rounded-full cursor-pointer hover:bg-gray-800"
-          >
-            <input id="upload" type="file" class="hidden" />
-            <img src="https://img.icons8.com/ios-filled/24/null/edit.png" alt="editar" />
-          </label>
-        </div>
-        <div class="mt-8 flex space-x-6">
-          <button class="px-8 py-3 bg-green-600 text-white text-lg rounded hover:bg-green-700">Guardar</button>
-          <button
-            class="px-8 py-3 bg-gray-600 text-white text-lg rounded hover:bg-gray-700 flex items-center space-x-2"
-          >
-            <span>Modificar imagen</span>
-          </button>
-        </div>
-      </div>
     </div>
-  </div>
-</div>
+</body>
+</html>

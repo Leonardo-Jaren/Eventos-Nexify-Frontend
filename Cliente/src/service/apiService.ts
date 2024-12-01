@@ -33,6 +33,9 @@ export class ApiService {
     public getUsers(): Observable<Usuario[]> {
         return this.http.get<Usuario[]>(`${this.ApiUrl}usuario/`, this.getHttpOptions());
     }
+    public getUser(id:string): Observable<Usuario> {
+      return this.http.get<Usuario>(`${this.ApiUrl}usuario/${id}/`, this.getHttpOptions());
+  }
 
     // ! Método para insertar un usuario
     public insertUser(usuario: Usuario): Observable<Usuario> {

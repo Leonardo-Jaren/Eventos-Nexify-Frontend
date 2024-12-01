@@ -8,21 +8,27 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
+  private userid: string | null = null;
   private token: string | null = null;
   private tokenKey = 'token';
   private ApiUrl = "http://127.0.0.1:8000/api/"; // URL de la API
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(username: string, password: string): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(`${this.ApiUrl}login/`, { username, password })
+  login(username: string, password: string): Observable<{ token: string,userid:string }> {
+    return this.http.post<{ token: string ,userid:string}>(`${this.ApiUrl}login/`, { username, password })
       .pipe(
         tap(response => {
+          this.userid=response.userid;
+          localStorage.setItem('userid',this.userid);
           this.token = response.token;
           localStorage.setItem('token', response.token);
         })
       );
   }
+
+
+
 
   getToken() {
     return this.token || localStorage.getItem('token');

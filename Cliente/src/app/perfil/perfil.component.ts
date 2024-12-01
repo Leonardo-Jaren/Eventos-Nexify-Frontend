@@ -12,7 +12,8 @@ import { Usuario } from '../../models/usuario.model';
   styleUrl: './perfil.component.css'
 })
 export class PerfilComponent {
-
+  usuarioActCod: string;
+  usuarioAct: Usuario;
   evento: Evento = new Evento();
   coordinadores: Usuario[] = [];
   ponentes: Usuario[] = [];
@@ -55,7 +56,18 @@ export class PerfilComponent {
         console.error('Error al cargar moderadores:', err);
       }
     });
+
+    this.usuarioActCod =localStorage.getItem('userid');
+    this.cliente.getUser(this.usuarioActCod).subscribe({ 
+      next: (usuario) => {
+        this.usuarioAct = usuario;
+      },
+      error: (err) => {
+        console.error('Error al cargar usuario:', err);
+      }}
+    );
   }
+
 
 
   navHome() {
