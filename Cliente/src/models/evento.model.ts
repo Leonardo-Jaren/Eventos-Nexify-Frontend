@@ -1,7 +1,6 @@
 import { Coordinador } from './coordinador.model';
 import { Ponente } from './ponente.model';
 import { Participante } from './participante.model';
-import { ModeradorSolicitud } from './moderador_solicitud.model';
 import { CategoriaEvento } from './categoria_evento.model';
 
 export class Evento {
@@ -14,13 +13,11 @@ export class Evento {
   ubicacion?: string | null;
   coordinador: Coordinador;
   ponente: Ponente;
-  moderadorNecesario: boolean;
-  moderador?: ModeradorSolicitud | null;
   participantes?: Participante[]; // Lista de participantes
   imagen?: string | null;
   horaInicio?: string | null;
   horaFin?: string | null;
-  estadoEvento?: 'Próximo' | 'En Vivo' | 'Culminado'; // Calculado en el backend
+  estadoEvento?: 'Próximo' | 'En Vivo' | 'Culminado';
 
   constructor(data: Partial<Evento> = {}) {
     this.id = data.id;
@@ -34,8 +31,6 @@ export class Evento {
     this.ubicacion = data.ubicacion || null;
     this.coordinador = new Coordinador(data.coordinador || {});
     this.ponente = new Ponente(data.ponente || {});
-    this.moderadorNecesario = data.moderadorNecesario || false;
-    this.moderador = data.moderador ? new ModeradorSolicitud(data.moderador) : null;
     this.participantes = (data.participantes || []).map((p) => new Participante(p));
     this.imagen = data.imagen || null;
     this.horaInicio = data.horaInicio || null;
@@ -66,10 +61,6 @@ export class Evento {
 
     if (this.esPresencial() && !this.ubicacion) {
       errores.push('La ubicación es obligatoria para eventos presenciales.');
-    }
-
-    if (this.moderadorNecesario && !this.moderador) {
-      errores.push('Debe asignar un moderador si es necesario.');
     }
 
     return errores;

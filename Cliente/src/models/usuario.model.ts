@@ -1,5 +1,5 @@
 export class Usuario {
-    id?: number; // ID opcional, se generará en el backend
+    id: number;
     username: string;
     email: string;
     password: string;

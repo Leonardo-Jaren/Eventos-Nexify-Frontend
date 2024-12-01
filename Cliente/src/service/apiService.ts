@@ -23,6 +23,8 @@ export class ApiService {
         };
     }
 
+// * Metodos para usuarios
+
     // ! Método para registrar un usuario
     public registerUser(usuario: Usuario): Observable<Usuario> {
         const body = JSON.stringify(usuario);
@@ -51,33 +53,49 @@ export class ApiService {
         return this.http.put<Usuario>(`${this.ApiUrl}usuario/${usuario.id}/`, cuerpo, this.getHttpOptions());
     }   
 
+// * Metodos para eventos
+
     // ! Método para obtener los eventos
-    getEventos(): Observable<Evento[]> {
+    public getEventos(): Observable<Evento[]> {
         return this.http.get<Evento[]>(`${this.ApiUrl}eventos/`, this.getHttpOptions());
     }
 
-    // ! Método para insertar un evento
-    insertEvento(formData: FormData): Observable<any> {
-        return this.http.post(`${this.ApiUrl}eventos/`, formData); // Sin encabezados manuales
-      }
-
-    // ! Coordinadores
-    getCoordinadores(): Observable<Usuario[]> {
-        return this.http.get<Usuario[]>(`${this.ApiUrl}coordinadores/`);
+    // ! Post para añadir nuevos eventos
+    public postEvento(evento: Evento): Observable<Evento> {
+        const body = JSON.stringify(evento);
+        return this.http.post<Evento>(`${this.ApiUrl}eventos/`, body, this.getHttpOptions());
     }
 
-    // ! Ponentes
-    getPonentes(): Observable<Usuario[]> {
-        return this.http.get<Usuario[]>(`${this.ApiUrl}ponentes/`);
+    // ! Post2 para añadir nuevos eventos
+    public postEvento2(formData: FormData): Observable<Evento> {
+        return this.http.post<Evento>(`${this.ApiUrl}eventos/`, formData);
     }
 
-    // ! Moderadores
-    getModeradores(): Observable<Usuario[]> {
-        return this.http.get<Usuario[]>(`${this.ApiUrl}moderadores/`);
+    // ! Put para actualizar eventos
+    public putEvento(evento: Evento): Observable<Evento> {
+        const body = JSON.stringify(evento);
+        return this.http.put<Evento>(`${this.ApiUrl}eventos/${evento.id}/`, body, this.getHttpOptions());
+    }
+
+    // ! Put2 para actualizar eventos
+    public putEvento2(formData: FormData, id: number): Observable<Evento> {
+        return this.http.put<Evento>(`${this.ApiUrl}eventos/${id}/`, formData);
     }
 
     // ! Eventos recientes
     public getEventosRecientes(): Observable<Evento[]> {
         return this.http.get<Evento[]>(`${this.ApiUrl}eventos/?ordering=-fecha_evento`, this.getHttpOptions());
+    }
+
+// * Metodos para roles
+
+    // ! Coordinadores
+    public getCoordinadores(): Observable<Usuario[]> {
+        return this.http.get<Usuario[]>(`${this.ApiUrl}coordinadores/`);
+    }
+
+    // ! Ponentes
+    public getPonentes(): Observable<Usuario[]> {
+        return this.http.get<Usuario[]>(`${this.ApiUrl}ponentes/`);
     }
 }
