@@ -40,5 +40,10 @@ export class RegisterComponent {
       }
     );
   }
+
+  //Una función que me rediriga a la pagina de login
+  onLogin(): void {
+    this.router.navigate(['/login']);
+  }
   
 }
