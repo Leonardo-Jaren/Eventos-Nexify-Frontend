@@ -15,48 +15,38 @@ export class CreateEventComponent implements OnInit {
   evento: Evento = new Evento();
   coordinadores: Usuario[] = [];
   ponentes: Usuario[] = [];
-  moderadores: Usuario[] = [];
   selectedFile: File | null = null;
+  coordinador: Usuario = new Usuario();
+  ponente: Usuario = new Usuario();
 
   constructor(
     private authService: AuthService,
-    private cliente: ApiService,
+    private apiService: ApiService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    // Cargar lista de coordinadores
-    this.cliente.getCoordinadores().subscribe({
-      next: (coordinadores) => {
-        this.coordinadores = coordinadores;
-      },
-      error: (err) => {
-        console.error('Error al cargar coordinadores:', err);
-      }
-    });
-
-    // Cargar lista de ponentes
-    this.cliente.getPonentes().subscribe({
-      next: (ponentes) => {
-        this.ponentes = ponentes;
-      },
-      error: (err) => {
-        console.error('Error al cargar ponentes:', err);
-      }
-    });
-
-    // Cargar lista de moderadores
-    this.cliente.getModeradores().subscribe({
-      next: (moderadores) => {
-        this.moderadores = moderadores;
-      },
-      error: (err) => {
-        console.error('Error al cargar moderadores:', err);
-      }
-    });
+    this.loadUsersData();
   }
 
-  logout() {
+  private loadUsersData(): void {
+    // Cargar datos de coordinadores, ponentes y moderadores de manera más eficiente
+    const userRequests = [
+      this.apiService.getCoordinadores().toPromise(),
+      this.apiService.getPonentes().toPromise(),
+    ];
+
+    Promise.all(userRequests)
+      .then(([coordinadores, ponentes, moderadores]) => {
+        this.coordinadores = coordinadores ?? [];
+        this.ponentes = ponentes ?? [];
+      })
+      .catch(err => {
+        console.error('Error al cargar los usuarios:', err);
+      });
+  }
+
+  logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
@@ -69,41 +59,47 @@ export class CreateEventComponent implements OnInit {
   }
 
   onCreateEvent(): void {
+    const formData = this.prepareFormData();
+    formData.forEach((value, key) => {
+      console.log(`Key: ${key}, Value:`, value);
+    })
+    this.apiService.postEvento2(formData).subscribe({
+      next: (evento) => {
+        console.log('Evento creado:', evento);
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.error('Error al crear evento:', err);
+      }
+    });
+  }
+
+  onPonenteChange(event: Event): void {
+    console.log('Seleccionado:', this.ponente);
+  }
+
+  private prepareFormData(): FormData {
     const formData = new FormData();
-  
     formData.append('nombre_evento', this.evento.nombreEvento);
     formData.append('descripcion', this.evento.descripcion);
     formData.append('fecha_evento', new Date(this.evento.fechaEvento).toISOString());
     formData.append('tipo_evento', this.evento.tipoEvento);
-  
+
     if (this.evento.tipoEvento === 'Presencial' && this.evento.ubicacion) {
       formData.append('ubicacion', this.evento.ubicacion);
     }
-  
-    formData.append('coordinador', this.evento.coordinador.toString());
-    formData.append('ponente', this.evento.ponente.toString());
-    formData.append('moderador_necesario', this.evento.moderadorNecesario.toString());
-  
-    if (this.evento.moderadorNecesario && this.evento.moderador) {
-      formData.append('moderador', this.evento.moderador.toString());
-    }
-  
+
+    formData.append('coordinador', this.coordinador.id.toString());
+    console.log('Coordinador:', this.coordinador);
+    formData.append('ponente', this.ponente.id.toString());
+    console.log('Ponente:', this.ponente);
+
     if (this.selectedFile) {
       formData.append('imagen', this.selectedFile, this.selectedFile.name);
     }
-  
-  
-    this.cliente.insertEvento(formData).subscribe({
-      next: (response) => {
-        console.log('Evento creado con éxito:', response);
-      },
-      error: (error) => {
-        console.error('Error al crear el evento:', error);
-      },
-    });
+
+    return formData;
   }
-  
-  
 
   onCancel(): void {
     this.router.navigate(['/home']);

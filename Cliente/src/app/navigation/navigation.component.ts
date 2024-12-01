@@ -11,6 +11,7 @@ export class NavigationComponent implements OnInit {
   menuRoutes: { label: string; path: string; icon: string }[] = [];
   role: string = '';
   showNavbar: boolean = true; // Controla si el navbar debe mostrarse
+  isDropdownOpen: boolean = false; // Controla el estado del menú desplegable
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -52,19 +53,27 @@ export class NavigationComponent implements OnInit {
     }
   }
 
+  // Método para alternar el estado del menú desplegable
+  toggleDropdown(): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
   // Método para navegar
   navigateTo(path: string): void {
     this.router.navigate([path]);
+    this.isDropdownOpen = false; // Cierra el menú desplegable si estaba abierto
   }
 
   // Método para cerrar sesión
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
+    this.isDropdownOpen = false; // Cierra el menú desplegable
   }
 
   // Método para ir al perfil
   navPerfil(): void {
     this.router.navigate(['/perfil']);
+    this.isDropdownOpen = false; // Cierra el menú desplegable
   }
 }
