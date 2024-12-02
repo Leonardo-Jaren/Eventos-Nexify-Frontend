@@ -1,5 +1,5 @@
 <app-navigation></app-navigation>
-<div class="container mx-auto py-10 pt-24">
+<div class="container mx-auto py-10">
   <h2 class="text-3xl font-bold text-gray-800 text-center mb-8">Lista de Eventos</h2>
 
   <div *ngIf="errorMessage" class="text-red-500 text-center">
@@ -10,9 +10,9 @@
     <div *ngFor="let evento of eventos" class="bg-white rounded-lg shadow-lg overflow-hidden">
       <!-- Imagen del evento (si tiene URL) -->
       <div class="h-48 bg-gray-200">
-        <img 
-          [src]="evento.imagen || 'assets/placeholder-image.jpg'" 
-          alt="Imagen del Evento" 
+        <img
+          [src]="evento.imagen || 'assets/placeholder-image.jpg'"
+          alt="Imagen del Evento"
           class="w-full h-full object-cover"
         />
       </div>

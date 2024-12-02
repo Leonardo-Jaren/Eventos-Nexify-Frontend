@@ -9,6 +9,7 @@ import { CalendarioComponent } from './calendario/calendario.component';
 import { RegisterComponent } from './register/register.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { PerfilComponent } from './perfil/perfil.component';
+
 const routes: Routes = [
   { path: '', component:  LoginComponent},
   { path: 'home', component: HomeComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
   { path: 'eventos', component: EventosComponent, canActivate: [AuthGuard] },
   { path: 'crear-evento', component: CreateEventComponent, canActivate: [AuthGuard] },
+  {path: 'perfil',component:PerfilComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' }, // Redirección al cargar la aplicación
   { path: '**', redirectTo: 'auth/login' } // Redirección en caso de rutas no encontradas
 ];

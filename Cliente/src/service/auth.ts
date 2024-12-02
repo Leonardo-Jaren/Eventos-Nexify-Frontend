@@ -8,8 +8,11 @@ import { tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://127.0.0.1:8000/api'; // URL base del backend
   private userid: string | null = null;
+  private token: string | null = null;
+  private tokenKey = 'token';
+  private ApiUrl = "http://127.0.0.1:8000/api/"; // URL de la API
+
   constructor(private http: HttpClient, private router: Router) {}
 
   login(email: string, password: string): Observable<any> {
