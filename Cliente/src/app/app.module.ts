@@ -24,7 +24,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { ModalModEventComponent } from './modal-mod-event/modal-mod-event.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { RegisterComponent } from './register/register.component'; // Importa FullCalendar
-import { ConfirmationService } from 'primeng/api';  // Importar el servicio de confirmación
+import { ConfirmationService } from 'primeng/api';
+import { PerfilComponent } from './perfil/perfil.component';  // Importar el servicio de confirmación
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { ConfirmationService } from 'primeng/api';  // Importar el servicio de c
     ModalModEventComponent,
     CreateEventComponent,
     RegisterComponent,
+    PerfilComponent,
   ],
   imports: [
     BrowserModule,

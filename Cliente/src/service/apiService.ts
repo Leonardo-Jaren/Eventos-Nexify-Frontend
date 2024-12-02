@@ -36,6 +36,10 @@ export class ApiService {
         return this.http.get<Usuario[]>(`${this.ApiUrl}usuario/`, this.getHttpOptions());
     }
 
+    public getUser(id:string): Observable<Usuario>{
+      return this.http.get<Usuario>(`${this.ApiUrl}usuario/${id}/`, this.getHttpOptions());
+    }
+
     // ! Método para insertar un usuario
     public insertUser(usuario: Usuario): Observable<Usuario> {
         const body = JSON.stringify(usuario);
@@ -51,7 +55,7 @@ export class ApiService {
     public updateUser(usuario: Usuario): Observable<Usuario> {
         let cuerpo = JSON.stringify(usuario);
         return this.http.put<Usuario>(`${this.ApiUrl}usuario/${usuario.id}/`, cuerpo, this.getHttpOptions());
-    }   
+    }
 
 // * Metodos para eventos
 
