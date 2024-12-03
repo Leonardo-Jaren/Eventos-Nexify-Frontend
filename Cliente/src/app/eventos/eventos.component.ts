@@ -82,7 +82,9 @@ export class EventosComponent implements OnInit {
     this.modalAbierto = false;
   }
 
-  editarEvento(): void {
-    this.router.navigate(['/crear-evento']);
+  displayModal: boolean = false;
+
+  editarEvento() {
+    this.displayModal = true;
   }
 }

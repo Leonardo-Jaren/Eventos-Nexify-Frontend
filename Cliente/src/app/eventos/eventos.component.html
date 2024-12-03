@@ -72,9 +72,14 @@
           Inscribirse
         </button>
 
+        <!-- eventos.component.html -->
+        <p-dialog [(visible)]="displayModal" [modal]="true" [style]="{width: '700px'}">
+          <app-detalles></app-detalles> <!-- Asegúrate de que este sea el selector correcto -->
+        </p-dialog>
+
         <button *ngIf="getUserRole() === 'Coordinador'" 
-        (click)="editarEvento()" 
-              class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
+                (click)="editarEvento()" 
+                class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
           Editar Evento
         </button>
 
