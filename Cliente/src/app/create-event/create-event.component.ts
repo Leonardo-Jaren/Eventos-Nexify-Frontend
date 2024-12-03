@@ -38,7 +38,7 @@ export class CreateEventComponent implements OnInit {
     ];
 
     Promise.all(userRequests)
-      .then(([coordinadores, ponentes, moderadores]) => {
+      .then(([coordinadores, ponentes]) => {
         this.coordinadores = coordinadores ?? [];
         this.ponentes = ponentes ?? [];
       })
@@ -85,7 +85,9 @@ export class CreateEventComponent implements OnInit {
     formData.append('descripcion', this.evento.descripcion);
     formData.append('fecha_evento', new Date(this.evento.fechaEvento).toISOString());
     formData.append('tipo_evento', this.evento.tipo_evento);
+    formData.append('tipo_evento', this.evento.tipo_evento);
 
+    if (this.evento.tipo_evento === 'Presencial' && this.evento.ubicacion) {
     if (this.evento.tipo_evento === 'Presencial' && this.evento.ubicacion) {
       formData.append('ubicacion', this.evento.ubicacion);
     }

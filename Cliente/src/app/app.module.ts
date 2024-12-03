@@ -26,6 +26,9 @@ import { CreateEventComponent } from './create-event/create-event.component';
 import { RegisterComponent } from './register/register.component'; // Importa FullCalendar
 import { ConfirmationService } from 'primeng/api';
 import { ModalComponent } from './modal/modal.component';  // Importar el servicio de confirmación
+import { CommonModule } from '@angular/common';
+import { InscripcionComponent } from './inscripcion/inscripcion.component';
+import { DetallesComponent } from './eventos/detalles/detalles.component';
 // Removed duplicate and incorrect import
 //import { MatDialogModule } from '@angular/material/dialog';
 
@@ -44,6 +47,8 @@ import { ModalComponent } from './modal/modal.component';  // Importar el servic
     ModalModEventComponent,
     CreateEventComponent,
     RegisterComponent,
+    InscripcionComponent,
+    DetallesComponent,
     ModalComponent,
   ],
   imports: [
@@ -61,6 +66,7 @@ import { ModalComponent } from './modal/modal.component';  // Importar el servic
     DialogModule, // Para diálogos
     ConfirmDialogModule, // Para diálogos de confirmación
     FullCalendarModule, // Para FullCalendar
+    CommonModule,
     //MatDialogModule, // Para diálogos de Angular Material
     
   ],

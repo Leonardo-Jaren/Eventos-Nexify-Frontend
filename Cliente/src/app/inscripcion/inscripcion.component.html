@@ -1,0 +1,16 @@
+<!-- src/app/inscripcion/inscripcion.component.html -->
+<div class="inscripcion">
+    <h2>Inscripción a Evento</h2>
+  
+    <div>
+      <label for="evento">Selecciona un evento:</label>
+      <select [(ngModel)]="eventoSeleccionado" name="evento" id="evento" required>
+        <option *ngFor="let evento of eventos" [ngValue]="evento">
+          {{ evento.nombre_evento }}
+        </option>
+      </select>
+    </div>
+  
+    <button (click)="inscribir()">Inscribirse</button>
+  </div>
+  

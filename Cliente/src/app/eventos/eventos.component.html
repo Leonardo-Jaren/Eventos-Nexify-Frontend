@@ -6,12 +6,13 @@
     {{ errorMessage }}
   </div>
 
+  <!-- Lista de eventos -->
   <div *ngIf="eventos.length > 0; else noEventos" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div *ngFor="let evento of eventos" class="bg-white rounded-lg shadow-lg overflow-hidden">
-      <!-- Imagen del evento (si tiene URL) -->
+    <div *ngFor="let evento of eventos" (click)="abrirModal(evento)" class="bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer">
+      <!-- Imagen del evento -->
       <div class="h-48 bg-gray-200">
         <img 
-          [src]="evento.imagen || 'assets/placeholder-image.jpg'" 
+          [src]="evento.imagen" 
           alt="Imagen del Evento" 
           class="w-full h-full object-cover"
         />
@@ -35,6 +36,46 @@
     </div>
   </div>
 
+  <!-- Modal con los detalles completos del evento -->
+  <div *ngIf="modalAbierto" 
+  class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50"
+  (click)="cerrarModal($event)">
+    <div class="bg-white p-8 rounded-lg max-w-4xl w-full flex" (click)="$event.stopPropagation()">
+      <!-- Imagen a la izquierda -->
+      <div class="w-1/3 h-48 bg-gray-200 rounded-lg overflow-hidden mr-6">
+      <img 
+        [src]="eventoSeleccionado.imagen" 
+        alt="Imagen del Evento" 
+        class="w-full h-full object-cover"
+      />
+      </div>
+
+      <!-- Contenido del modal a la derecha -->
+        <div class="w-2/3">
+          <h3 class="text-2xl font-bold text-gray-800 mb-4">{{ eventoSeleccionado.nombre_evento }}</h3>
+          <p><strong>Descripción:</strong> {{ eventoSeleccionado.descripcion }}</p>
+          <p><strong>Fecha:</strong> {{ eventoSeleccionado.fechaEvento | date: 'short' }}</p>
+          <p><strong>Tipo:</strong> {{ eventoSeleccionado.tipo_evento }}</p>
+          <p *ngIf="eventoSeleccionado.tipo_evento === 'Presencial'"><strong>Ubicación:</strong> {{ eventoSeleccionado.ubicacion }}</p>
+          <p><strong>Estado:</strong> {{ eventoSeleccionado.estadoEvento }}</p>
+          <p><strong>Ponente:</strong> {{ eventoSeleccionado.ponente.username }}</p>
+          <!-- Lista de participantes -->
+          <div *ngIf="eventoSeleccionado.participantes && eventoSeleccionado.participantes.length > 0">
+            <strong>Participantes:</strong>
+            <ul>
+              <li *ngFor="let participante of eventoSeleccionado.participantes">{{ participante.username }}</li>
+            </ul>
+          </div>
+          <!-- Botón de Inscripción visible solo si el rol es 'participante' -->
+      <button *ngIf="usuarioRol === 'Participante'" (click)="inscribirse(eventoSeleccionado)" 
+            class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
+        Inscribirse
+      </button>
+        </div>
+    </div>
+  </div>
+
+  <!-- Mensaje si no hay eventos -->
   <ng-template #noEventos>
     <p class="text-gray-500 text-center">No hay eventos registrados.</p>
   </ng-template>
