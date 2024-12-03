@@ -18,7 +18,7 @@
       </div>
       <!-- Información del evento -->
       <div class="p-4">
-        <h3 class="text-lg font-bold text-gray-800 mb-2 truncate">{{ evento.nombreEvento }}</h3>
+        <h3 class="text-lg font-bold text-gray-800 mb-2 truncate">{{ evento.nombre_evento }}</h3>
         <p class="text-gray-600 text-sm mb-2 truncate">
           <strong>Descripción:</strong> {{ evento.descripcion }}
         </p>
@@ -26,9 +26,9 @@
           <strong>Fecha:</strong> {{ evento.fechaEvento | date: 'longDate' }}
         </p>
         <p class="text-gray-600 text-sm mb-2">
-          <strong>Tipo:</strong> {{ evento.tipoEvento }}
+          <strong>Tipo:</strong> {{ evento.tipo_evento }}
         </p>
-        <p *ngIf="evento.tipoEvento === 'Presencial'" class="text-gray-600 text-sm">
+        <p *ngIf="evento.tipo_evento === 'Presencial'" class="text-gray-600 text-sm">
           <strong>Ubicación:</strong> {{ evento.ubicacion }}
         </p>
       </div>

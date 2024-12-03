@@ -5,49 +5,47 @@ import { CategoriaEvento } from './categoria_evento.model';
 
 export class Evento {
   id?: number;
-  nombreEvento: string;
+  nombre_evento: string;
   descripcion: string;
-  fechaEvento: Date | string;
+  fechaEvento: Date;
   categoriaEvento?: CategoriaEvento | null;
-  tipoEvento: 'Virtual' | 'Presencial';
+  tipo_evento: 'Virtual' | 'Presencial';
   ubicacion?: string | null;
   coordinador: Coordinador;
   ponente: Ponente;
   participantes?: Participante[]; // Lista de participantes
   imagen?: string | null;
-  horaInicio?: string | null;
-  horaFin?: string | null;
+  horaInicio: Date;
+  horaFin: Date;
   estadoEvento?: 'Próximo' | 'En Vivo' | 'Culminado';
 
   constructor(data: Partial<Evento> = {}) {
     this.id = data.id;
-    this.nombreEvento = data.nombreEvento || '';
+    this.nombre_evento = data.nombre_evento || ''; // Valor por defecto si está vacío
     this.descripcion = data.descripcion || '';
     this.fechaEvento = data.fechaEvento ? new Date(data.fechaEvento) : new Date();
-    this.categoriaEvento = data.categoriaEvento
-      ? new CategoriaEvento()
-      : null;
-    this.tipoEvento = data.tipoEvento || 'Virtual';
+    this.categoriaEvento = data.categoriaEvento ? new CategoriaEvento() : null;
+    this.tipo_evento = data.tipo_evento || 'Presencial';
     this.ubicacion = data.ubicacion || null;
     this.coordinador = new Coordinador(data.coordinador || {});
     this.ponente = new Ponente(data.ponente || {});
     this.participantes = (data.participantes || []).map((p) => new Participante(p));
     this.imagen = data.imagen || null;
-    this.horaInicio = data.horaInicio || null;
-    this.horaFin = data.horaFin || null;
+    this.horaInicio = data.horaInicio ? new Date(data.horaInicio) : new Date();
+    this.horaFin = data.horaFin ? new Date(data.horaFin) : new Date();
     this.estadoEvento = data.estadoEvento || 'Próximo';
   }
 
   // Método para verificar si el evento es presencial
   esPresencial(): boolean {
-    return this.tipoEvento === 'Presencial';
+    return this.tipo_evento === 'Presencial';
   }
 
   // Validaciones en el cliente
   validar(): string[] {
     const errores: string[] = [];
 
-    if (!this.nombreEvento) {
+    if (!this.nombre_evento) {
       errores.push('El nombre del evento es obligatorio.');
     }
 
