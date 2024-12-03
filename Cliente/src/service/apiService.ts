@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Usuario } from "../models/usuario.model";
 import { Evento } from "../models/evento.model";
+import { Inscripcion } from "../models/inscripcion.model";
 
 @Injectable({
   providedIn: "root"
@@ -51,7 +52,7 @@ export class ApiService {
     public updateUser(usuario: Usuario): Observable<Usuario> {
         let cuerpo = JSON.stringify(usuario);
         return this.http.put<Usuario>(`${this.ApiUrl}usuario/${usuario.id}/`, cuerpo, this.getHttpOptions());
-    }   
+    }
 
 // * Metodos para eventos
 
@@ -97,5 +98,22 @@ export class ApiService {
     // ! Ponentes
     public getPonentes(): Observable<Usuario[]> {
         return this.http.get<Usuario[]>(`${this.ApiUrl}ponentes/`);
+    }
+
+// * Metodos para la inscripcion de estudiantes a los eventos
+
+    // Método para inscribir a un estudiante a un evento
+    inscribirEstudiante(inscripcion: Inscripcion): Observable<Inscripcion> {
+        return this.http.post<Inscripcion>(this.ApiUrl, inscripcion);
+    }
+
+    // Método para obtener los eventos en los que está inscrito el estudiante
+    obtenerInscripciones(usuarioId: number): Observable<Inscripcion[]> {
+        return this.http.get<Inscripcion[]>(`${this.ApiUrl}usuario/${usuarioId}`);
+    }
+
+    // Método para obtener los estudiantes inscritos en un evento específico
+    obtenerParticipantesPorEvento(eventoId: number): Observable<Inscripcion[]> {
+        return this.http.get<Inscripcion[]>(`${this.ApiUrl}evento/${eventoId}`);
     }
 }

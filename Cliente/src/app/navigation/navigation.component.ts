@@ -36,7 +36,7 @@ export class NavigationComponent implements OnInit {
       case 'Participante':
         this.menuRoutes = [
           { label: 'Mis Eventos', path: '/mis-eventos', icon: 'fas fa-user-check' },
-          { label: 'Inscribirse', path: '/inscripciones', icon: 'fas fa-edit' },
+          { label: 'Lista de eventos', path: '/eventos', icon: 'fas fa-calendar-alt' },
         ];
         break;
 

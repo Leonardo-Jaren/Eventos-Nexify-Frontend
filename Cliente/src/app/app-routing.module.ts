@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { CalendarioComponent } from './calendario/calendario.component';
 import { RegisterComponent } from './register/register.component';
 import { CreateEventComponent } from './create-event/create-event.component';
+import { InscripcionComponent } from './inscripcion/inscripcion.component';
 
 const routes: Routes = [
   { path: '', component:  LoginComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
   { path: 'eventos', component: EventosComponent, canActivate: [AuthGuard] },
   { path: 'crear-evento', component: CreateEventComponent, canActivate: [AuthGuard] },
+  {path: 'inscripcion', component: InscripcionComponent, canActivate: [AuthGuard]},
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' }, // Redirección al cargar la aplicación
   { path: '**', redirectTo: 'auth/login' } // Redirección en caso de rutas no encontradas
 ];
