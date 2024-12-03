@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Evento } from '../../models/evento.model';
 import { AuthService } from '../../service/auth';
@@ -62,7 +61,6 @@ export class CreateEventComponent implements OnInit {
   onCreateEvent(): void {
     const formData = this.prepareFormData();
     formData.forEach((value, key) => {
-      console.log(`Key: ${key}, Value:`, value);
     })
     this.apiService.postEvento2(formData).subscribe({
       next: (evento) => {
@@ -82,12 +80,11 @@ export class CreateEventComponent implements OnInit {
   private prepareFormData(): FormData {
     const formData = new FormData();
     formData.append('nombre_evento', this.evento.nombre_evento);
+    console.log('Nombre:', this.evento.nombre_evento);
     formData.append('descripcion', this.evento.descripcion);
     formData.append('fecha_evento', new Date(this.evento.fechaEvento).toISOString());
     formData.append('tipo_evento', this.evento.tipo_evento);
-    formData.append('tipo_evento', this.evento.tipo_evento);
 
-    if (this.evento.tipo_evento === 'Presencial' && this.evento.ubicacion) {
     if (this.evento.tipo_evento === 'Presencial' && this.evento.ubicacion) {
       formData.append('ubicacion', this.evento.ubicacion);
     }
@@ -107,12 +104,4 @@ export class CreateEventComponent implements OnInit {
   onCancel(): void {
     this.router.navigate(['/home']);
   }
-
-  @Input() showModal: boolean = false;
-  @Output() closeModal = new EventEmitter<void>();
-
-  close() {
-    this.closeModal.emit();
-  }
-  
 }

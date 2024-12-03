@@ -24,14 +24,11 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { ModalModEventComponent } from './modal-mod-event/modal-mod-event.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { RegisterComponent } from './register/register.component'; // Importa FullCalendar
-import { ConfirmationService } from 'primeng/api';
-import { ModalComponent } from './modal/modal.component';  // Importar el servicio de confirmación
+import { ConfirmationService } from 'primeng/api';  // Importar el servicio de confirmación
 import { CommonModule } from '@angular/common';
 import { InscripcionComponent } from './inscripcion/inscripcion.component';
 import { DetallesComponent } from './eventos/detalles/detalles.component';
-// Removed duplicate and incorrect import
-//import { MatDialogModule } from '@angular/material/dialog';
-
+import { ModalComponent } from './modal/modal.component';
 
 
 @NgModule({

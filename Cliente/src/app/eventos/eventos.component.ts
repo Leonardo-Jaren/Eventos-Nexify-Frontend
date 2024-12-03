@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../service/apiService';
 import { Evento } from '../../models/evento.model';
 import { Usuario } from '../../models/usuario.model';
+import { AuthService } from '../../service/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-eventos',
@@ -9,6 +11,7 @@ import { Usuario } from '../../models/usuario.model';
   styleUrls: ['./eventos.component.css']
 })
 export class EventosComponent implements OnInit {
+  role: string = '';
   eventos: Evento[] = []; // Lista de eventos cargados
   errorMessage: string = ''; // Mensaje de error si ocurre
   modalAbierto: boolean = false; // Controla la visibilidad del modal
@@ -18,9 +21,10 @@ export class EventosComponent implements OnInit {
   ponentes: Usuario[] = [];
   selectedFile: File | null = null;
 
-  constructor(private cliente: ApiService) {}
+  constructor(private cliente: ApiService, private authService: AuthService,  private router: Router) {}
 
   ngOnInit(): void {
+    this.role = this.authService.getUserRole() ?? '';
     this.cliente.getEventos().subscribe({
       next: (eventos) => {
         // Agrega un log aquí para ver toda la estructura de los eventos
@@ -67,5 +71,18 @@ export class EventosComponent implements OnInit {
     } else {
       console.log('No tiene permisos para inscribirse');
     }
+  }
+
+  getUserRole(): string | null {
+    return localStorage.getItem('rol'); // Devuelve el rol del usuario
+  }
+
+
+  modalEditEvento(){
+    this.modalAbierto = false;
+  }
+
+  editarEvento(): void {
+    this.router.navigate(['/crear-evento']);
   }
 }

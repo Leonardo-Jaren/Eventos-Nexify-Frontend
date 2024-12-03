@@ -67,10 +67,17 @@
             </ul>
           </div>
           <!-- Botón de Inscripción visible solo si el rol es 'participante' -->
-      <button *ngIf="usuarioRol === 'Participante'" (click)="inscribirse(eventoSeleccionado)" 
-            class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
-        Inscribirse
-      </button>
+        <button *ngIf="getUserRole() === 'Participante'" (click)="inscribirse(eventoSeleccionado)" 
+              class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
+          Inscribirse
+        </button>
+
+        <button *ngIf="getUserRole() === 'Coordinador'" 
+        (click)="editarEvento()" 
+              class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">
+          Editar Evento
+        </button>
+
         </div>
     </div>
   </div>
