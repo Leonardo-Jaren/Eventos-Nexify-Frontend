@@ -23,6 +23,17 @@
           <i class="{{ route.icon }} text-sm mr-2"></i> {{ route.label }}
         </button>
       </ng-container>
+      
+      <div *ngIf="getUserRole() === 'Coordinador'" class="flex items-center bg-gray-800 bg-opacity-60 border border-transparent text-slate-400 px-4 py-2 rounded-lg hover:bg-gray-700">
+        <!-- Este contenido solo se verá si el rol del usuario es 'administrador' -->
+        <button
+        (click)="openCreateEventModal()"
+        >
+          <i class="fas fa-plus text-sm mr-2"></i> Crear evento
+        </button>
+        <!-- Modal -->
+        <app-modal [showModal]="showModal" (closeModal)="closeModal()"></app-modal>
+      </div>
 
       <!-- Perfil y Logout -->
       <div
@@ -50,6 +61,17 @@
 
   <!-- Menú desplegable -->
   <div *ngIf="isDropdownOpen" class="lg:hidden bg-gray-800 text-white p-4 space-y-2">
+    <div *ngIf="getUserRole() === 'Coordinador'" class="flex items-center bg-gray-800 bg-opacity-60 border border-transparent text-white px-4 py-2 rounded-lg hover:bg-gray-700">
+      <!-- Este contenido solo se verá si el rol del usuario es 'administrador' -->
+      <button
+      (click)="openCreateEventModal()"
+      >
+        <i class="fas fa-plus text-sm mr-2"></i> Crear evento
+      </button>
+      <!-- Modal -->
+    <app-modal [showModal]="showModal" (closeModal)="closeModal()"></app-modal>
+
+    </div>
     <ng-container *ngFor="let route of menuRoutes">
       <button
         (click)="navigateTo(route.path); toggleDropdown()"
@@ -57,6 +79,7 @@
       >
         <i class="{{ route.icon }} text-sm mr-2"></i> {{ route.label }}
       </button>
+      
     </ng-container>
     <button
       (click)="navPerfil(); toggleDropdown()"

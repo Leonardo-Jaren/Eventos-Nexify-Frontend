@@ -24,7 +24,11 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { ModalModEventComponent } from './modal-mod-event/modal-mod-event.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { RegisterComponent } from './register/register.component'; // Importa FullCalendar
-import { ConfirmationService } from 'primeng/api';  // Importar el servicio de confirmación
+import { ConfirmationService } from 'primeng/api';
+import { ModalComponent } from './modal/modal.component';  // Importar el servicio de confirmación
+// Removed duplicate and incorrect import
+//import { MatDialogModule } from '@angular/material/dialog';
+
 
 
 @NgModule({
@@ -40,6 +44,7 @@ import { ConfirmationService } from 'primeng/api';  // Importar el servicio de c
     ModalModEventComponent,
     CreateEventComponent,
     RegisterComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +61,8 @@ import { ConfirmationService } from 'primeng/api';  // Importar el servicio de c
     DialogModule, // Para diálogos
     ConfirmDialogModule, // Para diálogos de confirmación
     FullCalendarModule, // Para FullCalendar
+    //MatDialogModule, // Para diálogos de Angular Material
+    
   ],
   providers: [
     ConfirmationService, // Provee el servicio de confirm

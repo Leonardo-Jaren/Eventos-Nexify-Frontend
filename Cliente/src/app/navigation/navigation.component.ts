@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../service/auth';
 import { Router } from '@angular/router';
+import { CreateEventComponent } from '../create-event/create-event.component';
 
 @Component({
   selector: 'app-navigation',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./navigation.component.css'],
 })
 export class NavigationComponent implements OnInit {
-  menuRoutes: { label: string; path: string; icon: string }[] = [];
+  menuRoutes: { label: string; path: string; icon: string,}[] = [];
   role: string = '';
   showNavbar: boolean = true; // Controla si el navbar debe mostrarse
   isDropdownOpen: boolean = false; // Controla el estado del menú desplegable
@@ -29,7 +30,7 @@ export class NavigationComponent implements OnInit {
           { label: 'Inicio', path: '/home', icon: 'fas fa-home' },
           { label: 'Gestionar Ponente', path: '/gestionar-ponente', icon: 'fas fa-user-tie' },
           { label: 'Lista de Eventos', path: '/eventos', icon: 'fas fa-calendar-alt' },
-          { label: 'Crear Evento', path: '/crear-evento', icon: 'fas fa-plus' },
+          //{ label: 'Crear Evento', path: '/crear-evento', icon: 'fas fa-plus' },
         ];
         break;
 
@@ -76,4 +77,19 @@ export class NavigationComponent implements OnInit {
     this.router.navigate(['/perfil']);
     this.isDropdownOpen = false; // Cierra el menú desplegable
   }
+  
+  getUserRole(): string | null {
+    return localStorage.getItem('rol'); // Devuelve el rol del usuario
+  }
+
+  showModal: boolean = false;
+
+  openCreateEventModal() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
 }

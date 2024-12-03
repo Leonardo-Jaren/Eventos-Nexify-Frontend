@@ -18,6 +18,18 @@
         <p class="mt-2 lg:mt-4 text-white">
           Nuestro sistema está pensado para facilitarte el acceso a eventos que no solo informan, sino que también inspiran y fomentan el crecimiento personal y profesional. Cada evento es una oportunidad para conectar con expertos en diversas áreas, explorar nuevas ideas y compartir experiencias con una comunidad apasionada por el aprendizaje continuo.
         </p>
+        <div *ngIf="getUserRole() === 'Coordinador'" class="text-white">
+          <!-- Este contenido solo se verá si el rol del usuario es 'administrador' -->
+          <p>Bienvenido, Coordinador</p>
+        </div>
+        <div *ngIf="getUserRole() === 'Ponente'" class="text-white">
+          <!-- Este contenido solo se verá si el rol del usuario es 'administrador' -->
+          <p>Bienvenido, Ponente</p>
+        </div>
+        <div *ngIf="getUserRole() === 'Participante'" class="text-white">
+          <!-- Este contenido solo se verá si el rol del usuario es 'administrador' -->
+          <p>Bienvenido, Usuario</p>
+        </div>
       </div>
     </div>
   </div>

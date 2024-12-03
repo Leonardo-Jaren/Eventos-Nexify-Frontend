@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Evento } from '../../models/evento.model';
 import { AuthService } from '../../service/auth';
@@ -104,4 +105,12 @@ export class CreateEventComponent implements OnInit {
   onCancel(): void {
     this.router.navigate(['/home']);
   }
+
+  @Input() showModal: boolean = false;
+  @Output() closeModal = new EventEmitter<void>();
+
+  close() {
+    this.closeModal.emit();
+  }
+  
 }

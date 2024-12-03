@@ -10,6 +10,7 @@ import { Evento } from '../../models/evento.model'; // Importa el modelo de Even
 })
 export class HomeComponent implements OnInit {
   eventosRecientes: Evento[] = []; // Lista para almacenar eventos recientes
+  showModal: boolean = false;
 
   constructor(private router: Router, private apiService: ApiService) {}
 
@@ -46,5 +47,17 @@ export class HomeComponent implements OnInit {
 
   navInscripciones(): void {
     this.router.navigate(['/inscripciones']);
+  }
+  
+  getUserRole(): string | null {
+    return localStorage.getItem('rol'); // Devuelve el rol del usuario
+  }
+  
+  openCreateEventModal() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
   }
 }
